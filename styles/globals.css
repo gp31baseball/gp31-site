@@ -1,0 +1,18 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  @apply bg-[#0A1A3F] text-white scroll-smooth;
+  font-family: 'Inter', sans-serif;
+}
+
+.text-gold {
+  color: #D4AF37;
+}
+.bg-gold {
+  background-color: #D4AF37;
+}
+.border-gold {
+  border-color: #D4AF37;
+}

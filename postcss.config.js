@@ -1,11 +1,7 @@
-/** @type {import('tailwindcss').Config} */
+/** @type {import('postcss-load-config').Config} */
 module.exports = {
-  content: [
-    "./pages/**/*.{js,jsx}",
-    "./components/**/*.{js,jsx}",
-  ],
-  theme: {
-    extend: {},
+  plugins: {
+    tailwindcss: {},
+    autoprefixer: {},
   },
-  plugins: [require("@tailwindcss/forms")],
 };

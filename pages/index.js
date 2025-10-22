@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { Trophy, Star, Zap, Medal } from "lucide-react";
 
 export default function Home() {
@@ -53,12 +52,10 @@ export default function Home() {
     <div className="min-h-screen bg-gradient-to-b from-[#0A1A3F] to-[#07132F] text-white flex flex-col items-center">
       {/* Header */}
       <header className="text-center mt-8 mb-8">
-        <Image
+        <img
           src="/gp31-logo.png"
           alt="GP31 Logo"
-          width={200}
-          height={200}
-          className="mx-auto mb-4"
+          className="mx-auto mb-4 w-[200px]"
         />
         <h1 className="text-5xl font-bold text-[#D4AF37] drop-shadow-lg">
           GP31 Baseball 11U
@@ -91,29 +88,17 @@ export default function Home() {
         {/* Center Column – Championship Image + Recent Scores */}
         <div className="flex flex-col space-y-6">
           {/* Permanent Image */}
-<div className="bg-[#10224F] border-2 border-[#D4AF37] rounded-xl p-4 shadow-lg text-center">
-  <div className="relative w-full max-w-[800px] h-[500px] mx-auto">
-    {(() => {
-      // Local image fallback state
-      const [imgError, setImgError] = React.useState(false);
-      return (
-        <Image
-          src={imgError ? "/gp31-logo.png" : "/gallery/champs.jpg"}
-          alt="Championship Team"
-          width={800}
-          height={500}
-          className="rounded-lg border-4 border-[#D4AF37] shadow-xl object-cover"
-          onError={() => setImgError(true)}
-          priority
-        />
-      );
-    })()}
-  </div>
-  <p className="text-[#FFD700] italic mt-3 text-sm">
-    2025 11U PGBA Gold Cup Classic Champions — Houston, TX
-  </p>
-</div>
-
+          <div className="bg-[#10224F] border-2 border-[#D4AF37] rounded-xl p-4 shadow-lg text-center">
+            <img
+              src="/gallery/champs.jpg"
+              alt="Championship Team"
+              className="rounded-lg border-4 border-[#D4AF37] shadow-xl object-cover w-full max-w-[800px] mx-auto"
+              onError={(e) => (e.currentTarget.src = "/gp31-logo.png")}
+            />
+            <p className="text-[#FFD700] italic mt-3 text-sm">
+              2025 11U PGBA Gold Cup Classic Champions — Houston, TX
+            </p>
+          </div>
 
           {/* Recent Scores */}
           <div className="bg-[#10224F] border-2 border-[#D4AF37] rounded-xl p-6 shadow-lg">

@@ -54,3 +54,35 @@ body {
 .card-glow:hover {
   animation: cardPulse 1.5s ease-in-out infinite;
 }
+
+@keyframes goldPulse {
+  0% {
+    box-shadow: 0 0 5px #d4af37;
+  }
+  50% {
+    box-shadow: 0 0 20px #ffd700;
+  }
+  100% {
+    box-shadow: 0 0 5px #d4af37;
+  }
+}
+
+.glow-card {
+  animation: goldPulse 4s ease-in-out infinite;
+}
+
+.glow-card:hover {
+  animation: goldPulse 1.5s ease-in-out infinite;
+}
+
+/* Add spacing below fixed navbar */
+main,
+section,
+header {
+  scroll-margin-top: 100px;
+}
+
+body {
+  padding-top: 80px; /* matches your navbar height */
+}
+

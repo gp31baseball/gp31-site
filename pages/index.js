@@ -91,24 +91,29 @@ export default function Home() {
         {/* Center Column – Championship Image + Recent Scores */}
         <div className="flex flex-col space-y-6">
           {/* Permanent Image */}
-          <div className="bg-[#10224F] border-2 border-[#D4AF37] rounded-xl p-4 shadow-lg text-center">
-            <div className="relative w-full max-w-[800px] mx-auto">
-              <Image
-                src="/gallery/champs.jpg"
-                alt="Championship Team"
-                width={800}
-                height={500}
-                className="rounded-lg border-4 border-[#D4AF37] shadow-xl object-cover"
-                onError={(e) => {
-                  e.currentTarget.src = "/gp31-logo.png"; // fallback image
-                }}
-                priority
-              />
-            </div>
-            <p className="text-[#FFD700] italic mt-3 text-sm">
-              2025 11U PGBA Gold Cup Classic Champions — Houston, TX
-            </p>
-          </div>
+<div className="bg-[#10224F] border-2 border-[#D4AF37] rounded-xl p-4 shadow-lg text-center">
+  <div className="relative w-full max-w-[800px] h-[500px] mx-auto">
+    {(() => {
+      // Local image fallback state
+      const [imgError, setImgError] = React.useState(false);
+      return (
+        <Image
+          src={imgError ? "/gp31-logo.png" : "/gallery/champs.jpg"}
+          alt="Championship Team"
+          width={800}
+          height={500}
+          className="rounded-lg border-4 border-[#D4AF37] shadow-xl object-cover"
+          onError={() => setImgError(true)}
+          priority
+        />
+      );
+    })()}
+  </div>
+  <p className="text-[#FFD700] italic mt-3 text-sm">
+    2025 11U PGBA Gold Cup Classic Champions — Houston, TX
+  </p>
+</div>
+
 
           {/* Recent Scores */}
           <div className="bg-[#10224F] border-2 border-[#D4AF37] rounded-xl p-6 shadow-lg">

@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { Trophy, Star, Zap } from "lucide-react";
+import { Trophy, Star, Zap, Medal } from "lucide-react";
 
 export default function Home() {
   const leaderboard = {
@@ -26,10 +26,33 @@ export default function Home() {
     ],
   };
 
+  const recentScores = [
+    { result: "L, 8–12", opponent: "DrillBit Roughnecks 11U – Weaver" },
+    { result: "W, 14–6", opponent: "AP Express Basket 11U" },
+    { result: "W, 21–6", opponent: "Texas Seminoles" },
+    { result: "W, 7–6", opponent: "AP Express Basket 11U (Semifinals)" },
+    { result: "W, 12–4", opponent: "USA Prime BSB White – J. Taylor (Championship)" },
+  ];
+
+  const coaches = [
+    {
+      name: "Gregorio Petit",
+      bio: "Currently the manager of the Midland RockHounds. Gregorio played six seasons in Major League Baseball.",
+    },
+    {
+      name: "Javier Betancourt",
+      bio: "Signed with the Detroit Tigers and played in their minor league system for multiple seasons.",
+    },
+    {
+      name: "Andres Sthormes",
+      bio: "Also signed by the Detroit Tigers and competed within their minor league system.",
+    },
+  ];
+
   return (
-    <div className="min-h-screen flex flex-col items-center bg-gradient-to-b from-[#0A1A3F] to-[#07132F] text-white">
-      {/* Hero Section */}
-      <header className="text-center mt-8 mb-8">
+    <div className="min-h-screen bg-gradient-to-b from-[#0A1A3F] to-[#07132F] text-white flex flex-col items-center">
+      {/* Header */}
+      <header className="text-center mt-8 mb-10">
         <Image
           src="/gp31-logo.png"
           alt="GP31 Logo"
@@ -45,63 +68,84 @@ export default function Home() {
         </p>
       </header>
 
-      {/* Leaderboards */}
-      <section className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full max-w-6xl px-4 pb-12">
-        {/* Home Runs */}
-        <div className="bg-[#10224F] border-2 border-[#D4AF37] p-4 shadow-xl rounded-xl">
-          <div className="flex items-center mb-3">
+      {/* Main content grid */}
+      <section className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full max-w-7xl px-6 pb-16">
+        {/* Left Column – About Coaches */}
+        <div className="bg-[#10224F] border-2 border-[#D4AF37] rounded-xl p-6 shadow-lg">
+          <div className="flex items-center mb-4">
+            <Medal className="text-[#D4AF37] mr-2" />
+            <h2 className="text-2xl font-semibold text-[#FFD700]">About Coaches</h2>
+          </div>
+          {coaches.map((coach, i) => (
+            <div key={i} className="mb-4">
+              <p className="text-lg font-bold text-[#FFD700]">{coach.name}</p>
+              <p className="text-gray-200 text-sm leading-relaxed">{coach.bio}</p>
+            </div>
+          ))}
+        </div>
+
+        {/* Center Column – Recent Scores */}
+        <div className="bg-[#10224F] border-2 border-[#D4AF37] rounded-xl p-6 shadow-lg">
+          <div className="flex items-center mb-4">
             <Trophy className="text-[#D4AF37] mr-2" />
-            <h2 className="text-2xl font-semibold">Home Runs</h2>
+            <h2 className="text-2xl font-semibold text-[#FFD700]">Recent Scores</h2>
           </div>
-          {leaderboard.homeruns.map((p, i) => (
-            <p
-              key={i}
-              className="text-lg flex justify-between border-b border-gray-600 py-1"
-            >
-              <span>
-                {i + 1}. {p.name}
-              </span>
-              <span className="text-[#FFD700] font-bold">{p.stat}</span>
-            </p>
-          ))}
+          <p className="italic text-gray-300 mb-4">
+            2025 11U PGBA Gold Cup Classic (Houston, TX)
+          </p>
+          <ul className="space-y-2">
+            {recentScores.map((game, i) => (
+              <li key={i} className="flex justify-between border-b border-gray-700 pb-1">
+                <span>{game.result}</span>
+                <span className="text-gray-300 text-sm ml-2">{game.opponent}</span>
+              </li>
+            ))}
+          </ul>
         </div>
 
-        {/* Batting Avg */}
-        <div className="bg-[#10224F] border-2 border-[#D4AF37] p-4 shadow-xl rounded-xl">
-          <div className="flex items-center mb-3">
-            <Star className="text-[#D4AF37] mr-2" />
-            <h2 className="text-2xl font-semibold">Batting Avg</h2>
+        {/* Right Column – Team Leaders */}
+        <div className="space-y-6">
+          {/* Home Runs */}
+          <div className="bg-[#10224F] border-2 border-[#D4AF37] rounded-xl p-4 shadow-md">
+            <div className="flex items-center mb-2">
+              <Trophy className="text-[#D4AF37] mr-2" />
+              <h3 className="text-xl font-semibold">Home Runs</h3>
+            </div>
+            {leaderboard.homeruns.map((p, i) => (
+              <p key={i} className="flex justify-between border-b border-gray-700 py-1 text-sm">
+                <span>{i + 1}. {p.name}</span>
+                <span className="text-[#FFD700] font-bold">{p.stat}</span>
+              </p>
+            ))}
           </div>
-          {leaderboard.avg.map((p, i) => (
-            <p
-              key={i}
-              className="text-lg flex justify-between border-b border-gray-600 py-1"
-            >
-              <span>
-                {i + 1}. {p.name}
-              </span>
-              <span className="text-[#FFD700] font-bold">{p.stat}</span>
-            </p>
-          ))}
-        </div>
 
-        {/* Stolen Bases */}
-        <div className="bg-[#10224F] border-2 border-[#D4AF37] p-4 shadow-xl rounded-xl">
-          <div className="flex items-center mb-3">
-            <Zap className="text-[#D4AF37] mr-2" />
-            <h2 className="text-2xl font-semibold">Stolen Bases</h2>
+          {/* Batting Avg */}
+          <div className="bg-[#10224F] border-2 border-[#D4AF37] rounded-xl p-4 shadow-md">
+            <div className="flex items-center mb-2">
+              <Star className="text-[#D4AF37] mr-2" />
+              <h3 className="text-xl font-semibold">Batting Avg</h3>
+            </div>
+            {leaderboard.avg.map((p, i) => (
+              <p key={i} className="flex justify-between border-b border-gray-700 py-1 text-sm">
+                <span>{i + 1}. {p.name}</span>
+                <span className="text-[#FFD700] font-bold">{p.stat}</span>
+              </p>
+            ))}
           </div>
-          {leaderboard.steals.map((p, i) => (
-            <p
-              key={i}
-              className="text-lg flex justify-between border-b border-gray-600 py-1"
-            >
-              <span>
-                {i + 1}. {p.name}
-              </span>
-              <span className="text-[#FFD700] font-bold">{p.stat}</span>
-            </p>
-          ))}
+
+          {/* Stolen Bases */}
+          <div className="bg-[#10224F] border-2 border-[#D4AF37] rounded-xl p-4 shadow-md">
+            <div className="flex items-center mb-2">
+              <Zap className="text-[#D4AF37] mr-2" />
+              <h3 className="text-xl font-semibold">Stolen Bases</h3>
+            </div>
+            {leaderboard.steals.map((p, i) => (
+              <p key={i} className="flex justify-between border-b border-gray-700 py-1 text-sm">
+                <span>{i + 1}. {p.name}</span>
+                <span className="text-[#FFD700] font-bold">{p.stat}</span>
+              </p>
+            ))}
+          </div>
         </div>
       </section>
     </div>

@@ -134,8 +134,127 @@ export default function Home() {
       </section>
 
       {/* Main 3-column layout */}
-      {/* (your existing section code remains unchanged below) */}
-      {/* ... */}
+      <section className="grid grid-cols-1 md:grid-cols-[1fr_2fr_1fr] gap-6 w-full max-w-7xl px-6 pb-16">
+        {/* Left Column – About Coaches */}
+        <div className="bg-[#10224F] border-2 border-[#D4AF37] rounded-xl p-6 shadow-lg">
+          <div className="flex items-center mb-4">
+            <Medal className="text-[#D4AF37] mr-2" />
+            <h2 className="text-2xl font-semibold text-[#FFD700]">
+              About Coaches
+            </h2>
+          </div>
+          {coaches.map((coach, i) => (
+            <div key={i} className="mb-6 text-center">
+              <img
+                src={coach.image}
+                alt={coach.name}
+                className="w-28 h-28 mx-auto mb-3 rounded-full border-2 border-[#D4AF37] object-cover transition-transform duration-300 ease-in-out hover:scale-105 hover:shadow-[0_0_15px_#FFD700]"
+              />
+              <p className="text-lg font-bold text-[#FFD700]">{coach.name}</p>
+              <p className="text-gray-200 text-sm leading-relaxed">{coach.bio}</p>
+            </div>
+          ))}
+        </div>
+
+        {/* Center Column – Championship Image + Recent Scores */}
+        <div className="flex flex-col space-y-6">
+          <div className="bg-[#10224F] border-2 border-[#D4AF37] rounded-xl p-4 shadow-lg text-center">
+            <img
+              src="/gallery/champs.jpg"
+              alt="Championship Team"
+              className="rounded-lg border-4 border-[#D4AF37] shadow-xl object-cover w-full max-w-[800px] mx-auto transition-transform duration-500 ease-in-out hover:scale-105 hover:shadow-[0_0_25px_#FFD700]"
+              onError={(e) => (e.currentTarget.src = '/gp31-logo.png')}
+            />
+            <p className="text-[#FFD700] italic mt-3 text-sm">
+              2025 11U PGBA Gold Cup Classic Champions — Houston, TX
+            </p>
+          </div>
+
+          <div className="bg-[#10224F] border-2 border-[#D4AF37] rounded-xl p-6 shadow-lg">
+            <div className="flex items-center mb-4">
+              <Trophy className="text-[#D4AF37] mr-2" />
+              <h2 className="text-2xl font-semibold text-[#FFD700]">
+                Recent Scores
+              </h2>
+            </div>
+            <ul className="space-y-2">
+              {recentScores.map((game, i) => {
+                const isWin = game.result.startsWith("W");
+                return (
+                  <li
+                    key={i}
+                    className={`flex justify-between border-b border-gray-700 pb-1 ${
+                      isWin ? "text-green-400" : "text-red-400"
+                    }`}
+                  >
+                    <span className="font-semibold">{game.result}</span>
+                    <span className="text-gray-300 text-sm ml-2">
+                      {game.opponent}
+                    </span>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        </div>
+
+        {/* Right Column – Team Leaders */}
+        <div className="space-y-6">
+          <div className="bg-[#10224F] border-2 border-[#D4AF37] rounded-xl p-4 shadow-md">
+            <div className="flex items-center mb-2">
+              <Trophy className="text-[#D4AF37] mr-2" />
+              <h3 className="text-xl font-semibold">Home Runs</h3>
+            </div>
+            {leaderboard.homeruns.map((p, i) => (
+              <p
+                key={i}
+                className="flex justify-between border-b border-gray-700 py-1 text-sm"
+              >
+                <span>
+                  {i + 1}. {p.name}
+                </span>
+                <span className="text-[#FFD700] font-bold">{p.stat}</span>
+              </p>
+            ))}
+          </div>
+
+          <div className="bg-[#10224F] border-2 border-[#D4AF37] rounded-xl p-4 shadow-md">
+            <div className="flex items-center mb-2">
+              <Star className="text-[#D4AF37] mr-2" />
+              <h3 className="text-xl font-semibold">Batting Avg</h3>
+            </div>
+            {leaderboard.avg.map((p, i) => (
+              <p
+                key={i}
+                className="flex justify-between border-b border-gray-700 py-1 text-sm"
+              >
+                <span>
+                  {i + 1}. {p.name}
+                </span>
+                <span className="text-[#FFD700] font-bold">{p.stat}</span>
+              </p>
+            ))}
+          </div>
+
+          <div className="bg-[#10224F] border-2 border-[#D4AF37] rounded-xl p-4 shadow-md">
+            <div className="flex items-center mb-2">
+              <Zap className="text-[#D4AF37] mr-2" />
+              <h3 className="text-xl font-semibold">Stolen Bases</h3>
+            </div>
+            {leaderboard.steals.map((p, i) => (
+              <p
+                key={i}
+                className="flex justify-between border-b border-gray-700 py-1 text-sm"
+              >
+                <span>
+                  {i + 1}. {p.name}
+                </span>
+                <span className="text-[#FFD700] font-bold">{p.stat}</span>
+              </p>
+            ))}
+          </div>
+        </div>
+      </section>
     </div>
   );
 }

@@ -68,18 +68,22 @@ export default function Home() {
         </p>
       </header>
 
-      {/* Main 3-column grid */}
+      {/* Main 3-column layout */}
       <section className="grid grid-cols-1 md:grid-cols-[1fr_2fr_1fr] gap-6 w-full max-w-7xl px-6 pb-16">
         {/* Left Column – About Coaches */}
         <div className="bg-[#10224F] border-2 border-[#D4AF37] rounded-xl p-6 shadow-lg">
           <div className="flex items-center mb-4">
             <Medal className="text-[#D4AF37] mr-2" />
-            <h2 className="text-2xl font-semibold text-[#FFD700]">About Coaches</h2>
+            <h2 className="text-2xl font-semibold text-[#FFD700]">
+              About Coaches
+            </h2>
           </div>
           {coaches.map((coach, i) => (
             <div key={i} className="mb-4">
               <p className="text-lg font-bold text-[#FFD700]">{coach.name}</p>
-              <p className="text-gray-200 text-sm leading-relaxed">{coach.bio}</p>
+              <p className="text-gray-200 text-sm leading-relaxed">
+                {coach.bio}
+              </p>
             </div>
           ))}
         </div>
@@ -88,13 +92,19 @@ export default function Home() {
         <div className="flex flex-col space-y-6">
           {/* Permanent Image */}
           <div className="bg-[#10224F] border-2 border-[#D4AF37] rounded-xl p-4 shadow-lg text-center">
-            <Image
-              src="/gallery/champs.jpg"
-              alt="Championship Team"
-              width={800}
-              height={500}
-              className="rounded-lg mx-auto border-4 border-[#D4AF37] shadow-xl object-cover"
-            />
+            <div className="relative w-full max-w-[800px] mx-auto">
+              <Image
+                src="/gallery/champs.jpg"
+                alt="Championship Team"
+                width={800}
+                height={500}
+                className="rounded-lg border-4 border-[#D4AF37] shadow-xl object-cover"
+                onError={(e) => {
+                  e.currentTarget.src = "/gp31-logo.png"; // fallback image
+                }}
+                priority
+              />
+            </div>
             <p className="text-[#FFD700] italic mt-3 text-sm">
               2025 11U PGBA Gold Cup Classic Champions — Houston, TX
             </p>
@@ -104,7 +114,9 @@ export default function Home() {
           <div className="bg-[#10224F] border-2 border-[#D4AF37] rounded-xl p-6 shadow-lg">
             <div className="flex items-center mb-4">
               <Trophy className="text-[#D4AF37] mr-2" />
-              <h2 className="text-2xl font-semibold text-[#FFD700]">Recent Scores</h2>
+              <h2 className="text-2xl font-semibold text-[#FFD700]">
+                Recent Scores
+              </h2>
             </div>
             <ul className="space-y-2">
               {recentScores.map((game, i) => {
@@ -136,8 +148,13 @@ export default function Home() {
               <h3 className="text-xl font-semibold">Home Runs</h3>
             </div>
             {leaderboard.homeruns.map((p, i) => (
-              <p key={i} className="flex justify-between border-b border-gray-700 py-1 text-sm">
-                <span>{i + 1}. {p.name}</span>
+              <p
+                key={i}
+                className="flex justify-between border-b border-gray-700 py-1 text-sm"
+              >
+                <span>
+                  {i + 1}. {p.name}
+                </span>
                 <span className="text-[#FFD700] font-bold">{p.stat}</span>
               </p>
             ))}
@@ -150,8 +167,13 @@ export default function Home() {
               <h3 className="text-xl font-semibold">Batting Avg</h3>
             </div>
             {leaderboard.avg.map((p, i) => (
-              <p key={i} className="flex justify-between border-b border-gray-700 py-1 text-sm">
-                <span>{i + 1}. {p.name}</span>
+              <p
+                key={i}
+                className="flex justify-between border-b border-gray-700 py-1 text-sm"
+              >
+                <span>
+                  {i + 1}. {p.name}
+                </span>
                 <span className="text-[#FFD700] font-bold">{p.stat}</span>
               </p>
             ))}
@@ -164,8 +186,13 @@ export default function Home() {
               <h3 className="text-xl font-semibold">Stolen Bases</h3>
             </div>
             {leaderboard.steals.map((p, i) => (
-              <p key={i} className="flex justify-between border-b border-gray-700 py-1 text-sm">
-                <span>{i + 1}. {p.name}</span>
+              <p
+                key={i}
+                className="flex justify-between border-b border-gray-700 py-1 text-sm"
+              >
+                <span>
+                  {i + 1}. {p.name}
+                </span>
                 <span className="text-[#FFD700] font-bold">{p.stat}</span>
               </p>
             ))}

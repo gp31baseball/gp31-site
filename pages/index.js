@@ -3,25 +3,24 @@ import { Trophy, Star, Zap, Medal } from "lucide-react";
 export default function Home() {
   const leaderboard = {
     homeruns: [
-      { name: "Nate Snell", stat: 7 },
-      { name: "Ty Allen", stat: 5 },
-      { name: "Mason Cruz", stat: 4 },
-      { name: "Carter Lee", stat: 3 },
-      { name: "Brady West", stat: 2 },
+      { name: "Cam", stat: 2 },
+      { name: "Hunter", stat: 1 },
+      { name: "Juan", stat: 1 },
+      
     ],
     avg: [
-      { name: "Nate Snell", stat: ".512" },
-      { name: "Ty Allen", stat: ".468" },
-      { name: "Mason Cruz", stat: ".441" },
-      { name: "Carter Lee", stat: ".427" },
-      { name: "Brady West", stat: ".398" },
+      { name: "Hunter", stat: ".500" },
+      { name: "Juan", stat: ".433" },
+      { name: "Bruno", stat: ".424" },
+      { name: "Cam", stat: ".406" },
+      { name: "Nate", stat: ".393" },
     ],
     steals: [
-      { name: "Nate Snell", stat: 14 },
-      { name: "Carter Lee", stat: 11 },
-      { name: "Ty Allen", stat: 10 },
-      { name: "Mason Cruz", stat: 9 },
-      { name: "Brady West", stat: 7 },
+      { name: "Santi", stat: 24 },
+      { name: "Sebas", stat: 23 },
+      { name: "Caleb", stat: 17 },
+      { name: "Cam", stat: 14 },
+      { name: "Alex", stat: 12 },
     ],
   };
 
@@ -34,19 +33,29 @@ export default function Home() {
   ];
 
   const coaches = [
-    {
-      name: "Gregorio Petit",
-      bio: "Currently the manager of the Midland RockHounds. Gregorio played six seasons in Major League Baseball.",
-    },
-    {
-      name: "Javier Betancourt",
-      bio: "Signed with the Detroit Tigers and played in their minor league system for multiple seasons.",
-    },
-    {
-      name: "Andres Sthormes",
-      bio: "Also signed by the Detroit Tigers and competed within their minor league system.",
-    },
-  ];
+  {
+    name: "Gregorio Petit",
+    bio: "Gregorio Petit is a Venezuelan former Major League infielder who made his MLB debut with the Oakland Athletics in 2008 and went on to play for the Astros, Yankees, Angels and Twins. Now the manager of the Midland Rockhounds of the Texas League, he brings big-league experience and a championship mindset to GP31 Baseball.",
+    image: "/gallery/gregorio.jpg",
+  },
+  {
+    name: "Javier Betancourt",
+    bio: "Javier Betancourt is a Venezuelan former minor-league infielder who signed with the Detroit Tigers as an amateur free agent and developed through their system. Now he shares his deep infield experience and competitive spirit with the GP31 Baseball coaching staff.",
+    image: "/gallery/javier.jpg",
+  },
+  {
+    name: "Andres Sthormes",
+    bio: "Andres Sthormes is a Venezuelan former minor-league catcher who played in the Detroit Tigers and Miami Marlins organizations. He brings a wealth of experience working behind the plate and developing young hitters, and now contributes his expertise to the GP31 Baseball program.",
+    image: "/gallery/andres.jpg",
+  },
+  {
+  name: "Mario Fernandez",
+  bio: "Mario Fernandez is a Venezuelan former professional pitcher who spent several seasons in the Tampa Bay Rays organization. Known for his command and feel for the game, he now shares his experience developing young arms and teaching mound presence as part of the GP31 Baseball coaching staff.",
+  image: "/gallery/mario.jpg",
+},
+
+];
+
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#0A1A3F] to-[#07132F] text-white flex flex-col items-center">
@@ -75,14 +84,20 @@ export default function Home() {
               About Coaches
             </h2>
           </div>
-          {coaches.map((coach, i) => (
-            <div key={i} className="mb-4">
-              <p className="text-lg font-bold text-[#FFD700]">{coach.name}</p>
-              <p className="text-gray-200 text-sm leading-relaxed">
-                {coach.bio}
-              </p>
-            </div>
-          ))}
+         {coaches.map((coach, i) => (
+  <div key={i} className="mb-6 text-center">
+    <img
+  src={coach.image}
+  alt={coach.name}
+  className="w-28 h-28 mx-auto mb-3 rounded-full border-2 border-[#D4AF37] object-cover
+             transition-transform duration-300 ease-in-out hover:scale-105 hover:shadow-[0_0_15px_#FFD700]"
+/>
+
+    <p className="text-lg font-bold text-[#FFD700]">{coach.name}</p>
+    <p className="text-gray-200 text-sm leading-relaxed">{coach.bio}</p>
+  </div>
+))}
+
         </div>
 
         {/* Center Column – Championship Image + Recent Scores */}
@@ -90,11 +105,14 @@ export default function Home() {
           {/* Permanent Image */}
           <div className="bg-[#10224F] border-2 border-[#D4AF37] rounded-xl p-4 shadow-lg text-center">
             <img
-              src="/gallery/champs.jpg"
-              alt="Championship Team"
-              className="rounded-lg border-4 border-[#D4AF37] shadow-xl object-cover w-full max-w-[800px] mx-auto"
-              onError={(e) => (e.currentTarget.src = "/gp31-logo.png")}
-            />
+  src="/gallery/champs.jpg"
+  alt="Championship Team"
+  className="rounded-lg border-4 border-[#D4AF37] shadow-xl object-cover w-full max-w-[800px] mx-auto
+             transition-transform duration-500 ease-in-out hover:scale-105 hover:shadow-[0_0_25px_#FFD700] glow-gold"
+  onError={(e) => (e.currentTarget.src = '/gp31-logo.png')}
+/>
+
+
             <p className="text-[#FFD700] italic mt-3 text-sm">
               2025 11U PGBA Gold Cup Classic Champions — Houston, TX
             </p>

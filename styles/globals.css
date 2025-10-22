@@ -18,3 +18,39 @@ body {
 .border-gold {
   border-color: #D4AF37;
 }
+
+@keyframes goldPulse {
+  0% {
+    box-shadow: 0 0 5px #D4AF37;
+  }
+  50% {
+    box-shadow: 0 0 20px #FFD700;
+  }
+  100% {
+    box-shadow: 0 0 5px #D4AF37;
+  }
+}
+
+.glow-gold {
+  animation: goldPulse 3s ease-in-out infinite;
+}
+
+@keyframes cardPulse {
+  0% {
+    box-shadow: 0 0 4px #d4af37;
+  }
+  50% {
+    box-shadow: 0 0 14px #ffd700;
+  }
+  100% {
+    box-shadow: 0 0 4px #d4af37;
+  }
+}
+
+.card-glow {
+  animation: cardPulse 3s ease-in-out infinite;
+}
+
+.card-glow:hover {
+  animation: cardPulse 1.5s ease-in-out infinite;
+}

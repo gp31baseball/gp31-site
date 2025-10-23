@@ -9,7 +9,7 @@ export default function Home() {
     return () => clearTimeout(timer);
   }, []);
 
-  // ✅ Load GameChanger Widget Script on Mount
+  // ✅ Load GameChanger Widget Script on Mount (no scroll bar)
   useEffect(() => {
     const script = document.createElement("script");
     script.src = "https://widgets.gc.com/static/js/sdk.v1.js";
@@ -22,7 +22,7 @@ export default function Home() {
           maxVerticalGamesVisible: 20, // show more games
         });
 
-        // 🟡 Auto-scroll to bottom after widget loads
+        // 🟡 Auto-scroll to bottom after widget loads (no scrollbar)
         setTimeout(() => {
           const el = document.getElementById("gc-schedule-widget-yduq");
           if (el) el.scrollTop = el.scrollHeight;
@@ -185,7 +185,7 @@ export default function Home() {
             </p>
           </div>
 
-          {/* ✅ GameChanger Schedule Widget */}
+          {/* ✅ GameChanger Schedule Widget (no scroll bar) */}
           <div className="bg-[#10224F] border-2 border-[#D4AF37] rounded-xl p-6 shadow-lg">
             <div className="flex items-center mb-4 justify-center">
               <Trophy className="text-[#D4AF37] mr-2" />
@@ -195,7 +195,7 @@ export default function Home() {
             </div>
             <div
               id="gc-schedule-widget-yduq"
-              className="border-2 border-[#D4AF37] rounded-xl p-4 bg-[#0F1E3E] shadow-md overflow-auto max-h-[600px]"
+              className="border-2 border-[#D4AF37] rounded-xl p-4 bg-[#0F1E3E] shadow-md"
             ></div>
           </div>
         </div>

@@ -39,36 +39,31 @@ export default function Home() {
       .then((res) => res.text())
       .then((csvText) => {
         Papa.parse(csvText, {
-          header: true,
-          complete: (results) => {
-            const players = results.data
-              .filter((p) => parseInt(p.AB || 0) >= 7)
-              .map((p) => ({
-                name: `${p.First?.trim() || ""} ${p.Last?.trim() || ""}`.trim(),
-                ab: parseInt(p.AB || 0),
-                hits: parseInt(p.H || 0),
-                hr: parseInt(p.HR || 0),
-                sb: parseInt(p.SB || 0),
-                avg:
-                  parseFloat(p.AVG) ||
-                  (parseInt(p.AB || 0) > 0
-                    ? (parseInt(p.H || 0) / parseInt(p.AB || 0)).toFixed(3)
-                    : "0.000"),
-              }));
+  header: true,
+  transformHeader: (header) => header.trim().toLowerCase(), // normalize headers
+  complete: (results) => {
+    const players = results.data
+      .filter((p) => parseInt(p.ab || 0) >= 7) // min 7 ABs
+      .map((p) => ({
+        name: `${p.first?.trim() || ""} ${p.last?.trim() || ""}`.trim(),
+        ab: parseInt(p.ab || 0),
+        hits: parseInt(p.h || 0),
+        hr: parseInt(p.hr || 0),
+        sb: parseInt(p.sb || 0),
+        avg:
+          parseFloat(p.avg) ||
+          (parseInt(p.ab || 0) > 0
+            ? (parseInt(p.h || 0) / parseInt(p.ab || 0)).toFixed(3)
+            : "0.000"),
+      }));
 
-            const hrLeaders = [...players]
-              .sort((a, b) => b.hr - a.hr)
-              .slice(0, 5);
-            const avgLeaders = [...players]
-              .sort((a, b) => b.avg - a.avg)
-              .slice(0, 5);
-            const sbLeaders = [...players]
-              .sort((a, b) => b.sb - a.sb)
-              .slice(0, 5);
+    const hrLeaders = [...players].sort((a, b) => b.hr - a.hr).slice(0, 5);
+    const avgLeaders = [...players].sort((a, b) => b.avg - a.avg).slice(0, 5);
+    const sbLeaders = [...players].sort((a, b) => b.sb - a.sb).slice(0, 5);
 
-            setLeaders({ hr: hrLeaders, avg: avgLeaders, sb: sbLeaders });
-          },
-        });
+    setLeaders({ hr: hrLeaders, avg: avgLeaders, sb: sbLeaders });
+  },
+});
       })
       .catch(() => console.error("Error loading team_stats.csv"));
   }, []);

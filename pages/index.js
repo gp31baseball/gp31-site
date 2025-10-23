@@ -96,10 +96,11 @@ export default function Home() {
 
       {/* Launch Section */}
       <section
-        className={`bg-white text-center py-12 px-4 md:px-12 w-full transition-all duration-1000 ease-out transform ${
-          isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-        }`}
-      >
+  className={`bg-white text-center py-12 px-4 md:px-12 w-full mb-10 transition-all duration-1000 ease-out transform ${
+    isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+  }`}
+>
+
         <div className="max-w-3xl mx-auto">
           <h2
             className="text-4xl font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-amber-200 to-yellow-400 bg-[length:200%_auto] animate-[shimmer_3s_linear_infinite]"

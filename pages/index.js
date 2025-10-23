@@ -11,7 +11,7 @@ export default function Home() {
     return () => clearTimeout(timer);
   }, []);
 
-  // ✅ Load GameChanger Widget
+  // ✅ Load GameChanger Widget Script
   useEffect(() => {
     const script = document.createElement("script");
     script.src = "https://widgets.gc.com/static/js/sdk.v1.js";
@@ -43,15 +43,16 @@ export default function Home() {
             const players = results.data
               .filter((p) => parseInt(p.AB || 0) >= 7)
               .map((p) => ({
-                name: p.Player?.trim(),
+                name: `${p.First?.trim() || ""} ${p.Last?.trim() || ""}`.trim(),
                 ab: parseInt(p.AB || 0),
                 hits: parseInt(p.H || 0),
                 hr: parseInt(p.HR || 0),
                 sb: parseInt(p.SB || 0),
                 avg:
-                  parseInt(p.AB || 0) > 0
+                  parseFloat(p.AVG) ||
+                  (parseInt(p.AB || 0) > 0
                     ? (parseInt(p.H || 0) / parseInt(p.AB || 0)).toFixed(3)
-                    : "0.000",
+                    : "0.000"),
               }));
 
             const hrLeaders = [...players]
@@ -128,7 +129,7 @@ export default function Home() {
           ))}
         </div>
 
-        {/* Center – GC Widget */}
+        {/* Center – GameChanger Widget */}
         <div className="flex flex-col space-y-6">
           <div className="bg-[#10224F] border-2 border-[#D4AF37] rounded-xl p-4 shadow-lg text-center">
             <img
@@ -170,14 +171,18 @@ function StatBox({ title, statList, statKey }) {
       <div className="flex items-center mb-2">
         <h3 className="text-xl font-semibold text-[#FFD700]">{title}</h3>
       </div>
-      {statList.map((p, i) => (
-        <p key={i} className="flex justify-between border-b border-gray-700 py-1 text-sm">
-          <span>
-            {i + 1}. {p.name}
-          </span>
-          <span className="text-[#FFD700] font-bold">{p[statKey]}</span>
-        </p>
-      ))}
+      {statList.length > 0 ? (
+        statList.map((p, i) => (
+          <p key={i} className="flex justify-between border-b border-gray-700 py-1 text-sm">
+            <span>
+              {i + 1}. {p.name}
+            </span>
+            <span className="text-[#FFD700] font-bold">{p[statKey]}</span>
+          </p>
+        ))
+      ) : (
+        <p className="text-gray-400 italic text-sm">Not enough data yet.</p>
+      )}
     </div>
   );
 }

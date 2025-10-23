@@ -9,6 +9,23 @@ export default function Home() {
     return () => clearTimeout(timer);
   }, []);
 
+  // ✅ Load GameChanger Widget Script on Mount
+  useEffect(() => {
+    const script = document.createElement("script");
+    script.src = "https://widgets.gc.com/static/js/sdk.v1.js";
+    script.async = true;
+    script.onload = () => {
+      if (window.GC?.team?.schedule?.init) {
+        window.GC.team.schedule.init({
+          target: "#gc-schedule-widget-yduq",
+          widgetId: "d5747b9c-b13f-4cd2-b6b5-d00860d7ca4a",
+          maxVerticalGamesVisible: 4,
+        });
+      }
+    };
+    document.body.appendChild(script);
+  }, []);
+
   const leaderboard = {
     homeruns: [
       { name: "Cam", stat: 2 },
@@ -156,7 +173,7 @@ export default function Home() {
           ))}
         </div>
 
-        {/* Center Column – Championship Image + Recent Scores */}
+        {/* Center Column – Championship Image + Recent Scores + GameChanger Widget */}
         <div className="flex flex-col space-y-6">
           <div className="bg-[#10224F] border-2 border-[#D4AF37] rounded-xl p-4 shadow-lg text-center">
             <img
@@ -177,7 +194,7 @@ export default function Home() {
                 Recent Scores
               </h2>
             </div>
-            <ul className="space-y-2">
+            <ul className="space-y-2 mb-6">
               {recentScores.map((game, i) => {
                 const isWin = game.result.startsWith("W");
                 return (
@@ -195,6 +212,12 @@ export default function Home() {
                 );
               })}
             </ul>
+
+            {/* ✅ Embedded GameChanger Widget */}
+            <div
+              id="gc-schedule-widget-yduq"
+              className="border-2 border-[#D4AF37] rounded-xl p-4 bg-[#0F1E3E] shadow-md"
+            ></div>
           </div>
         </div>
 

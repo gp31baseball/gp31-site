@@ -9,7 +9,7 @@ export default function Home() {
     return () => clearTimeout(timer);
   }, []);
 
-  // ✅ Load GameChanger Widget Script on Mount (no scroll bar)
+  // ✅ Load GameChanger Widget Script on Mount, sized to match Coaches box
   useEffect(() => {
     const script = document.createElement("script");
     script.src = "https://widgets.gc.com/static/js/sdk.v1.js";
@@ -19,10 +19,10 @@ export default function Home() {
         window.GC.team.schedule.init({
           target: "#gc-schedule-widget-yduq",
           widgetId: "d5747b9c-b13f-4cd2-b6b5-d00860d7ca4a",
-          maxVerticalGamesVisible: 20, // show more games
+          maxVerticalGamesVisible: 10, // balanced height
         });
 
-        // 🟡 Auto-scroll to bottom after widget loads (no scrollbar)
+        // 🟡 Auto-scroll to bottom after widget loads (invisible)
         setTimeout(() => {
           const el = document.getElementById("gc-schedule-widget-yduq");
           if (el) el.scrollTop = el.scrollHeight;
@@ -135,17 +135,6 @@ export default function Home() {
             Learn More About GP31
           </a>
         </div>
-
-        <style jsx>{`
-          @keyframes shimmer {
-            0% {
-              background-position: 0% center;
-            }
-            100% {
-              background-position: 200% center;
-            }
-          }
-        `}</style>
       </section>
 
       {/* Main 3-column layout */}
@@ -185,17 +174,17 @@ export default function Home() {
             </p>
           </div>
 
-          {/* ✅ GameChanger Schedule Widget (no scroll bar) */}
-          <div className="bg-[#10224F] border-2 border-[#D4AF37] rounded-xl p-6 shadow-lg">
+          {/* ✅ GameChanger Schedule Widget renamed to Recent Games */}
+          <div className="bg-[#10224F] border-2 border-[#D4AF37] rounded-xl p-6 shadow-lg min-h-[720px] flex flex-col justify-start">
             <div className="flex items-center mb-4 justify-center">
               <Trophy className="text-[#D4AF37] mr-2" />
               <h2 className="text-2xl font-semibold text-[#FFD700]">
-                Upcoming Games
+                Recent Games
               </h2>
             </div>
             <div
               id="gc-schedule-widget-yduq"
-              className="border-2 border-[#D4AF37] rounded-xl p-4 bg-[#0F1E3E] shadow-md"
+              className="border-2 border-[#D4AF37] rounded-xl p-4 bg-[#0F1E3E] shadow-md w-full h-full"
             ></div>
           </div>
         </div>

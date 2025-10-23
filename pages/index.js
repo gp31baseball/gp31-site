@@ -48,14 +48,6 @@ export default function Home() {
     ],
   };
 
-  const recentScores = [
-    { result: "L, 8–12", opponent: "DrillBit Roughnecks 11U – Weaver" },
-    { result: "W, 14–6", opponent: "AP Express Basket 11U" },
-    { result: "W, 21–6", opponent: "Texas Seminoles" },
-    { result: "W, 7–6", opponent: "AP Express Basket 11U (Semifinals)" },
-    { result: "W, 12–4", opponent: "USA Prime BSB White – J. Taylor (Championship)" },
-  ];
-
   const coaches = [
     {
       name: "Gregorio Petit",
@@ -173,7 +165,7 @@ export default function Home() {
           ))}
         </div>
 
-        {/* Center Column – Championship Image + Recent Scores + GameChanger Widget */}
+        {/* Center Column – Championship Image + GameChanger Widget */}
         <div className="flex flex-col space-y-6">
           <div className="bg-[#10224F] border-2 border-[#D4AF37] rounded-xl p-4 shadow-lg text-center">
             <img
@@ -187,33 +179,14 @@ export default function Home() {
             </p>
           </div>
 
+          {/* ✅ GameChanger Schedule Widget */}
           <div className="bg-[#10224F] border-2 border-[#D4AF37] rounded-xl p-6 shadow-lg">
-            <div className="flex items-center mb-4">
+            <div className="flex items-center mb-4 justify-center">
               <Trophy className="text-[#D4AF37] mr-2" />
               <h2 className="text-2xl font-semibold text-[#FFD700]">
-                Recent Scores
+                Upcoming Games
               </h2>
             </div>
-            <ul className="space-y-2 mb-6">
-              {recentScores.map((game, i) => {
-                const isWin = game.result.startsWith("W");
-                return (
-                  <li
-                    key={i}
-                    className={`flex justify-between border-b border-gray-700 pb-1 ${
-                      isWin ? "text-green-400" : "text-red-400"
-                    }`}
-                  >
-                    <span className="font-semibold">{game.result}</span>
-                    <span className="text-gray-300 text-sm ml-2">
-                      {game.opponent}
-                    </span>
-                  </li>
-                );
-              })}
-            </ul>
-
-            {/* ✅ Embedded GameChanger Widget */}
             <div
               id="gc-schedule-widget-yduq"
               className="border-2 border-[#D4AF37] rounded-xl p-4 bg-[#0F1E3E] shadow-md"

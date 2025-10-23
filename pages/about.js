@@ -1,4 +1,5 @@
-export default function About() {
+export default function About() 
+{
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#0A1A3F] to-[#07132F] text-white flex flex-col items-center justify-center p-8">
       <img

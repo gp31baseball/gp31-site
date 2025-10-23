@@ -7,7 +7,6 @@ export default function GoldCup() {
     { src: "/gallery/goldcup3.jpg", caption: "Postgame Huddle" },
     { src: "/gallery/goldcup4.jpg", caption: "" },	
     { src: "/gallery/goldcup5.jpg", caption: "" },
-    { src: "/gallery/goldcup6.jpg", caption: "" },
     { src: "/gallery/goldcup7.jpg", caption: "" },
     { src: "/gallery/goldcup8.jpg", caption: "" },
     { src: "/gallery/goldcup9.jpg", caption: "" },

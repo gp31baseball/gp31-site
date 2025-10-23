@@ -19,8 +19,14 @@ export default function Home() {
         window.GC.team.schedule.init({
           target: "#gc-schedule-widget-yduq",
           widgetId: "d5747b9c-b13f-4cd2-b6b5-d00860d7ca4a",
-          maxVerticalGamesVisible: 4,
+          maxVerticalGamesVisible: 20, // show more games
         });
+
+        // 🟡 Auto-scroll to bottom after widget loads
+        setTimeout(() => {
+          const el = document.getElementById("gc-schedule-widget-yduq");
+          if (el) el.scrollTop = el.scrollHeight;
+        }, 2500);
       }
     };
     document.body.appendChild(script);
@@ -189,7 +195,7 @@ export default function Home() {
             </div>
             <div
               id="gc-schedule-widget-yduq"
-              className="border-2 border-[#D4AF37] rounded-xl p-4 bg-[#0F1E3E] shadow-md"
+              className="border-2 border-[#D4AF37] rounded-xl p-4 bg-[#0F1E3E] shadow-md overflow-auto max-h-[600px]"
             ></div>
           </div>
         </div>

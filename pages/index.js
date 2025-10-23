@@ -6,6 +6,7 @@ export default function Home() {
   const [isVisible, setIsVisible] = useState(false);
   const [leaders, setLeaders] = useState({ hr: [], avg: [], sb: [] });
 
+  // Fade-in for launch section
   useEffect(() => {
     const timer = setTimeout(() => setIsVisible(true), 300);
     return () => clearTimeout(timer);
@@ -32,7 +33,7 @@ export default function Home() {
     document.body.appendChild(script);
   }, []);
 
-  // ✅ Parse CSV & build leaderboards
+  // ✅ CSV Parser for Team Leaders
   useEffect(() => {
     fetch("/data/team_stats.csv")
       .then((res) => res.text())
@@ -72,18 +73,39 @@ export default function Home() {
       .catch(() => console.error("Error loading team_stats.csv"));
   }, []);
 
+  // Coaches section restored
   const coaches = [
-    { name: "Gregorio Petit", bio: "...", image: "/gallery/gregorio.jpg" },
-    { name: "Javier Betancourt", bio: "...", image: "/gallery/javier.jpg" },
-    { name: "Andres Sthormes", bio: "...", image: "/gallery/andres.jpg" },
-    { name: "Mario Fernandez", bio: "...", image: "/gallery/mario.jpg" },
+    {
+      name: "Gregorio Petit",
+      bio: "Gregorio Petit is a Venezuelan former Major League infielder who made his MLB debut with the Oakland Athletics in 2008 and went on to play for the Astros, Yankees, Angels and Twins. Now the manager of the Midland Rockhounds of the Texas League, he brings big-league experience and a championship mindset to GP31 Baseball.",
+      image: "/gallery/gregorio.jpg",
+    },
+    {
+      name: "Javier Betancourt",
+      bio: "Javier Betancourt is a Venezuelan former minor-league infielder who signed with the Detroit Tigers as an amateur free agent and developed through their system. Now he shares his deep infield experience and competitive spirit with the GP31 Baseball coaching staff.",
+      image: "/gallery/javier.jpg",
+    },
+    {
+      name: "Andres Sthormes",
+      bio: "Andres Sthormes is a Venezuelan former minor-league catcher who played in the Detroit Tigers and Miami Marlins organizations. He brings a wealth of experience working behind the plate and developing young hitters, and now contributes his expertise to the GP31 Baseball program.",
+      image: "/gallery/andres.jpg",
+    },
+    {
+      name: "Mario Fernandez",
+      bio: "Mario Fernandez is a Venezuelan former professional pitcher who spent several seasons in the Tampa Bay Rays organization. Known for his command and feel for the game, he now shares his experience developing young arms and teaching mound presence as part of the GP31 Baseball coaching staff.",
+      image: "/gallery/mario.jpg",
+    },
   ];
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#0A1A3F] to-[#07132F] text-white flex flex-col items-center">
       {/* Header */}
       <header className="text-center mt-8 mb-8">
-        <img src="/gp31-logo.png" alt="GP31 Logo" className="mx-auto mb-4 w-[200px]" />
+        <img
+          src="/gp31-logo.png"
+          alt="GP31 Logo"
+          className="mx-auto mb-4 w-[200px]"
+        />
         <h1 className="text-5xl font-bold text-[#D4AF37] drop-shadow-lg">
           GP31 Baseball 11U
         </h1>
@@ -105,47 +127,80 @@ export default function Home() {
           >
             🏆 GP31 Baseball Official Site Launch
           </h2>
+
+          <p className="text-lg text-blue-900 leading-relaxed mb-6">
+            We’re proud to announce the official launch of{" "}
+            <strong>GP31Baseball.com</strong>, the new home for{" "}
+            <strong>GP31 Baseball</strong> — a team built on faith, discipline,
+            and a drive to compete at the highest level.
+          </p>
+          <p className="text-lg text-blue-900 leading-relaxed mb-6">
+            Our mission is simple: to develop young athletes through hard work,
+            integrity, and teamwork, both on and off the field. The site
+            features updates on our latest tournaments, rosters, stats, and
+            player highlights — with much more to come as the 2025 season
+            unfolds.
+          </p>
           <p className="text-lg text-blue-900 leading-relaxed mb-8">
             Follow our journey as we grow the next generation of competitors
-            under the banner of Romans 8:31 — “If God is for us, who can be against us.”
+            under the banner of{" "}
+            <strong>
+              Romans 8:31 — “If God is for us, who can be against us.”
+            </strong>
           </p>
+          <a
+            href="/about"
+            className="inline-block bg-yellow-500 hover:bg-yellow-600 text-blue-900 font-semibold py-3 px-6 rounded-2xl shadow-md transition-transform transform hover:scale-105"
+          >
+            Learn More About GP31
+          </a>
         </div>
       </section>
 
       {/* Main 3-column layout */}
       <section className="grid grid-cols-1 md:grid-cols-[1fr_2fr_1fr] gap-6 w-full max-w-7xl px-6 pb-16">
-        {/* Left Column – Coaches */}
+        {/* Left – Coaches */}
         <div className="bg-[#10224F] border-2 border-[#D4AF37] rounded-xl p-6 shadow-lg">
           <div className="flex items-center mb-4">
             <Medal className="text-[#D4AF37] mr-2" />
-            <h2 className="text-2xl font-semibold text-[#FFD700]">About Coaches</h2>
+            <h2 className="text-2xl font-semibold text-[#FFD700]">
+              About Coaches
+            </h2>
           </div>
-          {coaches.map((c, i) => (
+          {coaches.map((coach, i) => (
             <div key={i} className="mb-6 text-center">
-              <img src={c.image} alt={c.name} className="w-28 h-28 mx-auto mb-3 rounded-full border-2 border-[#D4AF37]" />
-              <p className="text-lg font-bold text-[#FFD700]">{c.name}</p>
-              <p className="text-gray-200 text-sm leading-relaxed">{c.bio}</p>
+              <img
+                src={coach.image}
+                alt={coach.name}
+                className="w-28 h-28 mx-auto mb-3 rounded-full border-2 border-[#D4AF37] object-cover transition-transform duration-300 ease-in-out hover:scale-105 hover:shadow-[0_0_15px_#FFD700]"
+              />
+              <p className="text-lg font-bold text-[#FFD700]">{coach.name}</p>
+              <p className="text-gray-200 text-sm leading-relaxed">{coach.bio}</p>
             </div>
           ))}
         </div>
 
-        {/* Center – GameChanger Widget */}
+        {/* Center – GC Widget */}
         <div className="flex flex-col space-y-6">
           <div className="bg-[#10224F] border-2 border-[#D4AF37] rounded-xl p-4 shadow-lg text-center">
             <img
               src="/gallery/champs.jpg"
               alt="Championship Team"
-              className="rounded-lg border-4 border-[#D4AF37] shadow-xl object-cover w-full max-w-[800px] mx-auto"
+              className="rounded-lg border-4 border-[#D4AF37] shadow-xl object-cover w-full max-w-[800px] mx-auto transition-transform duration-500 ease-in-out hover:scale-105 hover:shadow-[0_0_25px_#FFD700]"
               onError={(e) => (e.currentTarget.src = '/gp31-logo.png')}
             />
             <p className="text-[#FFD700] italic mt-3 text-sm">
               2025 11U PGBA Gold Cup Classic Champions — Houston, TX
             </p>
           </div>
+
+          {/* GameChanger Recent Games */}
           <div className="bg-[#10224F] border-2 border-[#D4AF37] rounded-xl p-6 shadow-lg min-h-[720px] flex flex-col justify-start">
             <div className="flex items-center mb-4 justify-center">
               <Trophy className="text-[#D4AF37] mr-2" />
-              <h2 className="text-2xl font-semibold text-[#FFD700]">Recent Games</h2>
+              <h2 className="text-2xl font-semibold text-[#FFD700]">
+                Recent Games
+              </h2>
             </div>
             <div
               id="gc-schedule-widget-yduq"
@@ -154,7 +209,7 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Right – CSV-driven Team Leaders */}
+        {/* Right – CSV Team Leaders */}
         <div className="space-y-6">
           <StatBox title="Home Runs" statList={leaders.hr} statKey="hr" />
           <StatBox title="Batting Avg" statList={leaders.avg} statKey="avg" />

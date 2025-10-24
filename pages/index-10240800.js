@@ -13,32 +13,28 @@ export default function Home() {
     return () => clearTimeout(timer);
   }, []);
 
-  // ✅ Load GameChanger widget safely
+  // ✅ Load GameChanger widget
   useEffect(() => {
-    try {
-      const script = document.createElement("script");
-      script.src = "https://widgets.gc.com/static/js/sdk.v1.js";
-      script.async = true;
-      script.onload = () => {
-        if (window.GC?.team?.schedule?.init) {
-          window.GC.team.schedule.init({
-            target: "#gc-schedule-widget-yduq",
-            widgetId: "d5747b9c-b13f-4cd2-b6b5-d00860d7ca4a",
-            maxVerticalGamesVisible: 10,
-          });
-          setTimeout(() => {
-            const el = document.getElementById("gc-schedule-widget-yduq");
-            if (el) el.scrollTop = el.scrollHeight;
-          }, 2500);
-        }
-      };
-      document.body.appendChild(script);
-    } catch (err) {
-      console.warn("GameChanger widget load failed:", err);
-    }
+    const script = document.createElement("script");
+    script.src = "https://widgets.gc.com/static/js/sdk.v1.js";
+    script.async = true;
+    script.onload = () => {
+      if (window.GC?.team?.schedule?.init) {
+        window.GC.team.schedule.init({
+          target: "#gc-schedule-widget-yduq",
+          widgetId: "d5747b9c-b13f-4cd2-b6b5-d00860d7ca4a",
+          maxVerticalGamesVisible: 10,
+        });
+        setTimeout(() => {
+          const el = document.getElementById("gc-schedule-widget-yduq");
+          if (el) el.scrollTop = el.scrollHeight;
+        }, 2500);
+      }
+    };
+    document.body.appendChild(script);
   }, []);
 
-  // ✅ Simple CSV parser for your cleaned batting CSV (first-name only)
+  // ✅ CSV Parser for Team Leaders
   useEffect(() => {
     fetch("/data/team_stats.csv")
       .then((res) => res.text())
@@ -48,48 +44,54 @@ export default function Home() {
         Papa.parse(csvText, {
           header: true,
           skipEmptyLines: true,
+          delimiter: "",
           transformHeader: (h) => h.trim().toLowerCase(),
           beforeFirstChunk: (chunk) => {
             const lines = chunk.split(/\r\n|\n/);
             const headerIndex = lines.findIndex((line) =>
-              line.toLowerCase().startsWith("number,last,first")
+              line.startsWith("Number,Last,First")
             );
-            return lines.slice(headerIndex).join("\n");
+            if (headerIndex !== -1) return lines.slice(headerIndex).join("\n");
+            return chunk;
           },
+
           complete: (results) => {
             const rawPlayers = results.data
-              .filter((p) => {
-                const first = (p.first || p.First || "").trim();
-                const last = (p.last || p.Last || "").trim();
-                return (
-                  first &&
-                  !first.toLowerCase().includes("glossary") &&
-                  !last.toLowerCase().includes("totals")
-                );
-              })
+              // ✅ Remove blank or partial names
+              .filter((p) => (p.first?.trim() || "") && (p.last?.trim() || ""))
               .map((p) => {
-                const keys = Object.keys(p).reduce((acc, key) => {
-                  acc[key.trim().toLowerCase()] = p[key];
-                  return acc;
-                }, {});
+                const ab = parseInt(p.ab || 0);
+                const hits = parseInt(p.h || 0);
+                const hr = parseInt(p.hr || 0);
 
-                const ab = parseInt(keys.ab || 0);
-                const hits = parseInt(keys.h || 0);
-                const hr = parseInt(keys.hr || 0);
-                const sb = parseInt(keys.sb || 0);
+                // ✅ Use the first "sb" column — the real offensive steals
+let sb = 0;
+if (p.sb !== undefined) {
+  const sbRaw = (p.sb || "").toString().trim();
+  sb = Number(sbRaw.replace(/[^0-9.]/g, "")) || 0;
+} else if (p["sb_1"] !== undefined) {
+  // fallback just in case PapaParse shifted column order
+  const sbRaw = (p["sb_1"] || "").toString().trim();
+  sb = Number(sbRaw.replace(/[^0-9.]/g, "")) || 0;
+}
 
+                // ✅ Compute batting average
                 const rawAvg =
-                  keys.avg && !isNaN(parseFloat(keys.avg))
-                    ? parseFloat(keys.avg)
+                  p.avg && !isNaN(parseFloat(p.avg))
+                    ? parseFloat(p.avg)
                     : ab > 0
                     ? hits / ab
                     : 0;
 
-                const formattedAvg =
-                  rawAvg > 0 ? `.${rawAvg.toFixed(3).split(".")[1]}` : ".000";
+                // ✅ Format AVG like ".571" (no leading 0)
+                let formattedAvg = ".000";
+                if (rawAvg > 0) {
+                  const digits = rawAvg.toFixed(3).split(".")[1];
+                  formattedAvg = `.${digits}`;
+                }
 
                 return {
-                  name: (keys.first || "").trim(), // ✅ first name only
+                  name: `${p.first.trim()} ${p.last.trim()}`,
                   ab,
                   hits,
                   hr,
@@ -99,30 +101,25 @@ export default function Home() {
                 };
               });
 
+            // ✅ Separate filters for leaderboards
             const batters = rawPlayers.filter((p) => p.ab > 10);
+            const runners = rawPlayers.filter((p) => p.sb > 0);
 
-            // ✅ Home Run Leaders
             const hrLeaders = [...batters]
               .filter((p) => p.hr > 0)
               .sort((a, b) => b.hr - a.hr)
               .slice(0, 5);
 
-            // ✅ Batting Avg Leaders
             const avgLeaders = [...batters]
-              .sort((a, b) => b.avg - a.avg)
+              .sort((a, b) => parseFloat(b.avg) - parseFloat(a.avg))
               .slice(0, 5);
 
-            // ✅ Stolen Base Leaders
-            const sbLeaders = [...rawPlayers]
-              .filter((p) => p.sb > 0)
-              .sort((a, b) => b.sb - a.sb)
-              .slice(0, 5);
+            // ✅ Stolen Bases Leaders (ensure numeric sort)
+const sbLeaders = [...runners]
+  .filter((p) => !isNaN(p.sb) && p.sb > 0)
+  .sort((a, b) => Number(b.sb) - Number(a.sb))
+  .slice(0, 5);
 
-            console.log("✅ Parsed players:", rawPlayers.length);
-            console.log(
-              "✅ SB leaderboard:",
-              sbLeaders.map((p) => `${p.name}: ${p.sb}`).join(", ")
-            );
 
             setLeaders({ hr: hrLeaders, avg: avgLeaders, sb: sbLeaders });
           },

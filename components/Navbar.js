@@ -7,14 +7,7 @@ export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 10) {
-        setIsScrolled(true);
-      } else {
-        setIsScrolled(false);
-      }
-    };
-
+    const handleScroll = () => setIsScrolled(window.scrollY > 10);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -43,10 +36,10 @@ export default function Navbar() {
         return (
           <Link key={link.path} href={link.path}>
             <span
-              className={`cursor-pointer text-sm md:text-base font-semibold transition-all duration-300 ${
+              className={`cursor-pointer text-sm md:text-base font-semibold transition-all duration-300 glow-gold-nav ${
                 isActive
                   ? "text-[#FFD700] border-b-2 border-[#FFD700] pb-1"
-                  : "text-white hover:text-[#FFD700] hover:border-b-2 hover:border-[#FFD700] pb-1 border-transparent"
+                  : "text-[#FFD700] hover:text-[#FFD700] hover:border-b-2 hover:border-[#FFD700] pb-1 border-transparent"
               }`}
             >
               {link.name}

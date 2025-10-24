@@ -2,13 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ---------- Global Body Styles ---------- */
 body {
   @apply bg-[#0A1A3F] text-white scroll-smooth;
   font-family: 'Inter', sans-serif;
 }
 
-
-
+/* ---------- Color Utilities ---------- */
 .text-gold {
   color: #D4AF37;
 }
@@ -19,6 +19,7 @@ body {
   border-color: #D4AF37;
 }
 
+/* ---------- Gold Pulse Animations ---------- */
 @keyframes goldPulse {
   0% {
     box-shadow: 0 0 5px #D4AF37;
@@ -55,27 +56,36 @@ body {
   animation: cardPulse 1.5s ease-in-out infinite;
 }
 
-@keyframes goldPulse {
-  0% {
-    box-shadow: 0 0 5px #d4af37;
-  }
-  50% {
-    box-shadow: 0 0 20px #ffd700;
-  }
-  100% {
-    box-shadow: 0 0 5px #d4af37;
-  }
-}
-
+/* Duplicate keyframes cleaned and unified */
 .glow-card {
   animation: goldPulse 4s ease-in-out infinite;
 }
-
 .glow-card:hover {
   animation: goldPulse 1.5s ease-in-out infinite;
 }
 
-/* Add spacing below fixed navbar */
+/* ---------- Text Glow (Static Gold Pop) ---------- */
+.glow-gold-text {
+  text-shadow:
+    0 0 4px rgba(212, 175, 55, 0.4),
+    0 0 8px rgba(255, 215, 0, 0.3),
+    0 0 12px rgba(255, 215, 0, 0.2);
+}
+
+.glow-gold-nav {
+  text-shadow:
+    0 0 5px rgba(212, 175, 55, 0.6),
+    0 0 10px rgba(255, 215, 0, 0.4);
+  transition: text-shadow 0.3s ease-in-out;
+}
+
+.glow-gold-nav:hover {
+  text-shadow:
+    0 0 8px rgba(212, 175, 55, 0.8),
+    0 0 14px rgba(255, 215, 0, 0.5);
+}
+
+/* ---------- Layout Helpers ---------- */
 main,
 section,
 header {
@@ -85,4 +95,3 @@ header {
 body {
   padding-top: 80px; /* matches your navbar height */
 }
-

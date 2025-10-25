@@ -232,7 +232,7 @@ export const players = [
     image: "/gallery/chulo.jpg",
     profileImage: "/gallery/chulo_profile.jpg",
     position: "MIF / Mascot",
-    batsThrows: "R/R",
+    batsThrows: "L/R",
     favorites: {
       position: "Team Mascot",
       mlbPlayer: "Papi",

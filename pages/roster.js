@@ -6,7 +6,7 @@ export default function Roster() {
     { number: 27, name: "Santi", position: "MIF / RHP", batsThrows: "R/R", image: "/gallery/santi.jpg" },
     { number: 31, name: "Sebas", position: "MIF / RHP", batsThrows: "R/R", image: "/gallery/sebas.jpg" },
     { number: 48, name: "Caleb", position: "IF / OF", batsThrows: "R/R", image: "/gallery/caleb.jpg" },
-    { number: 23, name: "Cam", position: "C / OF", batsThrows: "L/R", image: "/gallery/cam.jpg" },
+    { number: 23, name: "Cam", position: "C / OF", batsThrows: "R/R", image: "/gallery/cam.jpg" },
     { number: 17, name: "Alex", position: "3B / OF / 1B", batsThrows: "R/R", image: "/gallery/alex.jpg" },
     { number: 7, name: "Cesar", position: "OF / 2B / RHP", batsThrows: "R/R", image: "/gallery/cesar.jpg" },
     { number: 21, name: "Lucas", position: "MIF / RHP", batsThrows: "R/R", image: "/gallery/lucas.jpg" },

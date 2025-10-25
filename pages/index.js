@@ -196,6 +196,7 @@ export default function Home() {
         animate="show"
         className="grid grid-cols-1 md:grid-cols-[1fr_2fr_1fr] gap-6 w-full max-w-7xl px-6 pb-16"
       >
+        {/* Coaches Box */}
         <motion.div
           variants={fadeUp}
           className="bg-[#10224F] border-2 border-[#D4AF37] rounded-xl p-6 shadow-lg"
@@ -226,7 +227,9 @@ export default function Home() {
           ))}
         </motion.div>
 
+        {/* Middle Column */}
         <motion.div variants={fadeUp} className="flex flex-col space-y-6">
+          {/* Championship Image */}
           <motion.div
             variants={fadeUp}
             whileHover={{ scale: 1.03 }}
@@ -243,6 +246,7 @@ export default function Home() {
             </p>
           </motion.div>
 
+          {/* GameChanger Widget */}
           <motion.div
             variants={fadeUp}
             className="bg-[#10224F] border-2 border-[#D4AF37] rounded-xl p-6 shadow-lg min-h-[720px] flex flex-col justify-start"
@@ -260,10 +264,22 @@ export default function Home() {
           </motion.div>
         </motion.div>
 
+        {/* Stats + Romans Box Column */}
         <motion.div variants={fadeUp} className="space-y-6">
           <StatBox title="Home Runs" statList={leaders.hr} statKey="hr" icon={<Crown />} />
           <StatBox title="Batting Avg" statList={leaders.avg} statKey="avg" icon={<Star />} />
           <StatBox title="Stolen Bases" statList={leaders.sb} statKey="sb" icon={<Zap />} />
+
+         {/* ✝️ GP31 Faith Banner Box */}
+<div className="bg-[#10224F] border-2 border-[#D4AF37] rounded-xl p-4 shadow-[0_0_20px_rgba(255,215,0,0.15)] hover:shadow-[0_0_25px_#FFD700] transition-all duration-300 ease-in-out transform hover:-translate-y-1 flex justify-center items-center">
+  <img
+    src="/gallery/social-preview.jpg"
+    alt="GP31 Faith Family Baseball Banner"
+    className="rounded-lg border-2 border-[#D4AF37] shadow-[0_0_15px_rgba(255,215,0,0.3)] w-full h-auto max-w-[350px] object-contain"
+  />
+</div>
+
+
           <p className="text-gray-400 italic text-xs text-center mt-3">
             Last updated: {lastUpdated}
           </p>

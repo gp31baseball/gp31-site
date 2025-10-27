@@ -264,21 +264,64 @@ export default function Home() {
           </motion.div>
         </motion.div>
 
-        {/* Stats + Romans Box Column */}
+        {/* Stats + Faith Banner Column */}
         <motion.div variants={fadeUp} className="space-y-6">
           <StatBox title="Home Runs" statList={leaders.hr} statKey="hr" icon={<Crown />} />
           <StatBox title="Batting Avg" statList={leaders.avg} statKey="avg" icon={<Star />} />
           <StatBox title="Stolen Bases" statList={leaders.sb} statKey="sb" icon={<Zap />} />
 
-         {/* ✝️ GP31 Faith Banner Box */}
-<div className="bg-[#10224F] border-2 border-[#D4AF37] rounded-xl p-4 shadow-[0_0_20px_rgba(255,215,0,0.15)] hover:shadow-[0_0_25px_#FFD700] transition-all duration-300 ease-in-out transform hover:-translate-y-1 flex justify-center items-center">
-  <img
-    src="/gallery/social-preview.jpg"
-    alt="GP31 Faith Family Baseball Banner"
-    className="rounded-lg border-2 border-[#D4AF37] shadow-[0_0_15px_rgba(255,215,0,0.3)] w-full h-auto max-w-[350px] object-contain"
-  />
-</div>
+          {/* ✝️ Faith Banner Box — Social Links */}
+          <div
+            className="bg-[#10224F] border-2 border-[#D4AF37] rounded-xl p-4 shadow-[0_0_20px_rgba(255,215,0,0.15)]
+              transition-all duration-300 ease-in-out transform hover:-translate-y-1 hover:shadow-[0_0_25px_#FFD700]
+              flex flex-col items-center text-center space-y-3 cursor-pointer relative z-10"
+            style={{ pointerEvents: "auto" }}
+          >
+            <img
+              src="/gallery/social-preview.jpg"
+              alt="GP31 Baseball — Social Banner"
+              className="rounded-lg border-2 border-[#D4AF37] shadow-[0_0_15px_rgba(255,215,0,0.3)]
+                w-full h-auto max-w-[350px] object-contain transition duration-300 hover:opacity-90"
+            />
 
+            <div className="flex justify-center items-center gap-6 mt-2">
+              {/* Facebook */}
+              <a
+                href="https://www.facebook.com/GP31baseball"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group relative z-20"
+                style={{ pointerEvents: "auto" }}
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  className="w-8 h-8 text-[#1877F2] transition-transform duration-300 group-hover:scale-110"
+                >
+                  <path d="M22 12.07C22 6.48 17.52 2 11.93 2S2 6.48 2 12.07c0 4.98 3.66 9.1 8.44 9.87v-6.99H8.07v-2.88h2.37V9.41c0-2.34 1.4-3.63 3.54-3.63 1.02 0 2.09.18 2.09.18v2.3h-1.18c-1.16 0-1.52.72-1.52 1.46v1.76h2.59l-.41 2.88h-2.18v6.99c4.78-.77 8.43-4.89 8.43-9.87z" />
+                </svg>
+              </a>
+
+              {/* Instagram */}
+              <a
+                href="https://www.instagram.com/gp31baseball/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group relative z-20"
+                style={{ pointerEvents: "auto" }}
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  className="w-8 h-8 text-[#E4405F] transition-transform duration-300 group-hover:scale-110"
+                >
+                  <path d="M7.75 2h8.5C19.55 2 22 4.46 22 7.75v8.5c0 3.29-2.46 5.75-5.75 5.75h-8.5C4.46 22 2 19.54 2 16.25v-8.5C2 4.46 4.46 2 7.75 2zm0 1.5A4.26 4.26 0 0 0 3.5 7.75v8.5A4.26 4.26 0 0 0 7.75 20.5h8.5a4.26 4.26 0 0 0 4.25-4.25v-8.5A4.26 4.26 0 0 0 16.25 3.5h-8.5zM12 7.25a4.75 4.75 0 1 1 0 9.5 4.75 4.75 0 0 1 0-9.5zm0 1.5a3.25 3.25 0 1 0 0 6.5 3.25 3.25 0 0 0 0-6.5zm5.38-.75a1.13 1.13 0 1 1 0 2.26 1.13 1.13 0 0 1 0-2.26z" />
+                </svg>
+              </a>
+            </div>
+          </div>
 
           <p className="text-gray-400 italic text-xs text-center mt-3">
             Last updated: {lastUpdated}

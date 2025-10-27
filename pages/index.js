@@ -120,13 +120,18 @@ export default function Home() {
     },
     {
       name: "Andres Sthormes",
-      bio: "Former catcher (Detroit Tigers, Miami Marlins). Expert at developing hitters and managing pitchers, key to GP31’s offensive approach.",
+      bio: "Former catcher (Detroit Tigers, Miami Marlins) and GP31’s catching coach. Expert at developing hitters, managing pitchers, and refining defensive fundamentals behind the plate.",
       image: "/gallery/andres.jpg",
     },
     {
       name: "Mario Fernandez",
       bio: "Former pitcher (Tampa Bay Rays). Specializes in developing young arms, teaching mound presence, and controlling tempo under pressure.",
       image: "/gallery/mario.jpg",
+    },
+    {
+      name: "Jose Carrillo",
+      bio: "Venezuelan-born former professional player in the Houston Astros organization (Tri-City ValleyCats / GCL Astros). Serves as GP31’s all-purpose coach, bringing versatile experience and strong leadership across all areas of player development.",
+      image: "/gallery/jose_carrillo.jpg",
     },
   ];
 

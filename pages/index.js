@@ -219,22 +219,41 @@ export default function Home() {
               className="mb-6 text-center"
               whileHover={{ scale: 1.05 }}
             >
-              <img
-                src={coach.image}
-                alt={coach.name}
-                className="w-28 h-28 mx-auto mb-3 rounded-full border-2 border-[#D4AF37] object-cover"
-              />
+              {coach.name === "Mario Fernandez" ? (
+                <a
+                  href="https://calendar.app.google/F9CSGfwr3FU5Djqr5"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group relative inline-block"
+                >
+                  <img
+                    src={coach.image}
+                    alt={coach.name}
+                    className="w-28 h-28 mx-auto mb-3 rounded-full border-2 border-[#FFD700] object-cover 
+                      shadow-[0_0_20px_rgba(255,215,0,0.4)] 
+                      transition duration-300 group-hover:shadow-[0_0_35px_rgba(255,215,0,0.9)] 
+                      group-hover:scale-105"
+                  />
+                  <span className="absolute bottom-2 left-1/2 -translate-x-1/2 bg-[#FFD700] text-[#0A1A3F] text-xs font-bold px-2 py-0.5 rounded-lg opacity-90 group-hover:opacity-100">
+                    Click to schedule
+                  </span>
+                </a>
+              ) : (
+                <img
+                  src={coach.image}
+                  alt={coach.name}
+                  className="w-28 h-28 mx-auto mb-3 rounded-full border-2 border-[#D4AF37] object-cover"
+                />
+              )}
+
               <p className="text-lg font-bold text-[#FFD700]">{coach.name}</p>
-              <p className="text-gray-200 text-sm leading-relaxed">
-                {coach.bio}
-              </p>
+              <p className="text-gray-200 text-sm leading-relaxed">{coach.bio}</p>
             </motion.div>
           ))}
         </motion.div>
 
         {/* Middle Column */}
         <motion.div variants={fadeUp} className="flex flex-col space-y-6">
-          {/* Championship Image */}
           <motion.div
             variants={fadeUp}
             whileHover={{ scale: 1.03 }}
@@ -275,7 +294,7 @@ export default function Home() {
           <StatBox title="Batting Avg" statList={leaders.avg} statKey="avg" icon={<Star />} />
           <StatBox title="Stolen Bases" statList={leaders.sb} statKey="sb" icon={<Zap />} />
 
-          {/* ✝️ Faith Banner Box — Social Links */}
+          {/* Faith Banner + Social Links */}
           <div
             className="bg-[#10224F] border-2 border-[#D4AF37] rounded-xl p-4 shadow-[0_0_20px_rgba(255,215,0,0.15)]
               transition-all duration-300 ease-in-out transform hover:-translate-y-1 hover:shadow-[0_0_25px_#FFD700]
@@ -290,13 +309,11 @@ export default function Home() {
             />
 
             <div className="flex justify-center items-center gap-6 mt-2">
-              {/* Facebook */}
               <a
                 href="https://www.facebook.com/GP31baseball"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group relative z-20"
-                style={{ pointerEvents: "auto" }}
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -308,13 +325,11 @@ export default function Home() {
                 </svg>
               </a>
 
-              {/* Instagram */}
               <a
                 href="https://www.instagram.com/gp31baseball/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group relative z-20"
-                style={{ pointerEvents: "auto" }}
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -374,7 +389,9 @@ function StatBox({ title, statList, statKey, icon }) {
                 isLeader ? "bg-[#FFD700]/10 rounded-lg font-bold" : ""
               }`}
             >
-              <span>{i + 1}. {p.name}</span>
+              <span>
+                {i + 1}. {p.name}
+              </span>
               <span
                 className={`font-semibold ${
                   isLeader

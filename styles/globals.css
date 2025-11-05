@@ -93,7 +93,7 @@ header {
 }
 
 body {
-  padding-top: 80px; /* matches your navbar height */
+  padding-top: 0; /* matches your navbar height */
 }
 
 /* ---------- Gold Text Shine for Headers ---------- */

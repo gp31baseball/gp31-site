@@ -89,8 +89,7 @@ export default function TryoutFlyer() {
         >
           ⚾ Visit the 11U Team Page
         </Link>
-            </div>
+      </div>
     </main>
   );
 }
-

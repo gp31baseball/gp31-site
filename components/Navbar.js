@@ -5,7 +5,6 @@ import Image from "next/image";
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
 
-  // Close menu on ESC key
   useEffect(() => {
     const handleEsc = (e) => e.key === "Escape" && setMenuOpen(false);
     window.addEventListener("keydown", handleEsc);
@@ -15,18 +14,24 @@ export default function Navbar() {
   return (
     <nav className="w-full bg-[#07163B] text-white flex flex-wrap justify-between items-center px-6 py-2 border-b border-[#FFD700]/40 shadow-sm relative z-50">
       {/* Left: Logo */}
-      <Link href="/" className="flex items-center h-[60px]">
-        <Image
-          src="/images/gp31.jpg"
-          alt="GP31 Baseball Logo"
-          width={80}
-          height={50}
-          className="object-contain"
-          priority
-        />
+      <Link href="/" className="flex items-center h-[60px] md:h-[70px]">
+        <div className="relative flex items-center justify-center">
+          {/* Soft gold glow behind logo */}
+          <div className="absolute inset-0 blur-lg rounded-full bg-[#FFD700]/30 scale-110"></div>
+
+          {/* Actual logo */}
+          <Image
+            src="/images/gp31.jpg"
+            alt="GP31 Baseball Logo"
+            width={80}
+            height={50}
+            className="object-contain max-h-[55px] md:max-h-[60px] w-auto relative z-10"
+            priority
+          />
+        </div>
       </Link>
 
-      {/* Hamburger button (mobile only) */}
+      {/* Hamburger Button */}
       <button
         onClick={() => setMenuOpen(!menuOpen)}
         aria-label="Toggle menu"
@@ -65,7 +70,7 @@ export default function Navbar() {
         )}
       </button>
 
-      {/* Backdrop (visible when menu open) */}
+      {/* Backdrop */}
       {menuOpen && (
         <div
           className="fixed inset-0 bg-black/40 backdrop-blur-sm z-40 md:hidden"
@@ -73,7 +78,7 @@ export default function Navbar() {
         ></div>
       )}
 
-      {/* Nav Links */}
+      {/* Navigation Links */}
       <div
         className={`${
           menuOpen ? "max-h-[500px]" : "max-h-0"

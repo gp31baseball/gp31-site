@@ -28,34 +28,53 @@ export default function TryoutFlyer() {
         GP31 2026 Spring Baseball Tryouts
       </h1>
 
-      {/* Clickable Flyer */}
-      <Link href="/contact" passHref>
-        <img
-          src="/images/tryout-flyer.jpg"
-          alt="GP31 Tryout Flyer"
-          style={{
-            maxWidth: "90%",
-            height: "auto",
-            borderRadius: "14px",
-            boxShadow: "0 0 25px rgba(255, 215, 0, 0.25)",
-            cursor: "pointer",
-            transition: "transform 0.3s ease, box-shadow 0.3s ease",
-          }}
-          onMouseOver={(e) => {
-            e.currentTarget.style.transform = "scale(1.02)";
-            e.currentTarget.style.boxShadow =
-              "0 0 40px rgba(255, 215, 0, 0.45)";
-          }}
-          onMouseOut={(e) => {
-            e.currentTarget.style.transform = "scale(1)";
-            e.currentTarget.style.boxShadow =
-              "0 0 25px rgba(255, 215, 0, 0.25)";
-          }}
-        />
-      </Link>
+      {/* Centered Clickable Flyer */}
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          width: "100%",
+        }}
+      >
+        <Link href="/contact" passHref>
+          <img
+            src="/images/tryout-flyer.jpg"
+            alt="GP31 Tryout Flyer"
+            style={{
+              maxWidth: "90%",
+              height: "auto",
+              borderRadius: "14px",
+              boxShadow: "0 0 25px rgba(255, 215, 0, 0.25)",
+              cursor: "pointer",
+              transition: "transform 0.3s ease, box-shadow 0.3s ease",
+              display: "block",
+              margin: "0 auto",
+            }}
+            onMouseOver={(e) => {
+              e.currentTarget.style.transform = "scale(1.02)";
+              e.currentTarget.style.boxShadow =
+                "0 0 40px rgba(255, 215, 0, 0.45)";
+            }}
+            onMouseOut={(e) => {
+              e.currentTarget.style.transform = "scale(1)";
+              e.currentTarget.style.boxShadow =
+                "0 0 25px rgba(255, 215, 0, 0.25)";
+            }}
+          />
+        </Link>
+      </div>
 
-      {/* Stronger CTA for 11U Page */}
-      <div style={{ marginTop: "40px", textAlign: "center" }}>
+      {/* Centered CTA for 11U Page */}
+      <div
+        style={{
+          marginTop: "40px",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          width: "100%",
+        }}
+      >
         <Link
           href="/11u"
           style={{
@@ -71,6 +90,7 @@ export default function TryoutFlyer() {
             boxShadow: "0 0 15px rgba(255, 215, 0, 0.4)",
             transition:
               "transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease",
+            textAlign: "center",
           }}
           onMouseOver={(e) => {
             e.currentTarget.style.transform = "scale(1.05)";

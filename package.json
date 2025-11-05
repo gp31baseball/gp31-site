@@ -13,12 +13,14 @@
     "framer-motion": "^12.23.24",
     "lucide-react": "^0.546.0",
     "next": "14.2.5",
+    "nodemailer": "^7.0.10",
     "papaparse": "^5.5.3",
     "react": "18.3.1",
     "react-countup": "^6.5.3",
     "react-dom": "18.3.1",
+    "resend": "^6.4.1",
     "tailwindcss": "^3.4.3",
-    "twilio": "^5.10.3",
+    "twilio": "^5.10.4",
     "yet-another-react-lightbox": "^3.25.0"
   },
   "devDependencies": {

@@ -16,19 +16,47 @@ export default function Contact() {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Form submitted:", formData); // placeholder for EmailJS
-    setSubmitted(true);
-    setTimeout(() => setSubmitted(false), 4000);
-    setFormData({ name: "", email: "", phone: "", age: "", position: "", message: "" });
+    console.log("Submitting form:", formData);
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await res.json();
+      console.log("Server response:", data);
+
+      if (res.ok) {
+        setSubmitted(true);
+        setTimeout(() => setSubmitted(false), 4000);
+        setFormData({
+          name: "",
+          email: "",
+          phone: "",
+          age: "",
+          position: "",
+          message: "",
+        });
+      } else {
+        alert("Email failed: " + data.message);
+      }
+    } catch (err) {
+      console.error("Error submitting form:", err);
+      alert("Something went wrong while sending your message.");
+    }
   };
 
   return (
     <div className="relative min-h-screen flex flex-col items-center justify-center bg-[#0A1A3F] overflow-hidden text-white px-6 pb-20">
       {/* Parallax Watermark */}
-      <div className="absolute inset-0 opacity-10 z-0 bg-fixed bg-center bg-cover"
-        style={{ backgroundImage: "url('/watermark.png')" }}></div>
+      <div
+        className="absolute inset-0 opacity-10 z-0 bg-fixed bg-center bg-cover"
+        style={{ backgroundImage: "url('/watermark.png')" }}
+      ></div>
 
       {/* Content Layer */}
       <div className="relative z-10 w-full max-w-2xl">

@@ -1,29 +1,27 @@
-import fs from "fs";
-import path from "path";
 import { useState } from "react";
+import kv from "../../lib/kv"; // ✅ pulls data from your KV cloud store
 
-// ----- Server Side -----
+// ---------- Server Side ----------
 export async function getServerSideProps() {
-  const dir = path.join(process.cwd(), "data", "submissions");
-  let submissions = [];
+  // Get all submission IDs from KV
+  const ids = await kv.lrange("gp31_submissions", 0, -1);
+  const submissions = [];
 
-  if (fs.existsSync(dir)) {
-    const files = fs.readdirSync(dir).filter((f) => f.endsWith(".json"));
-    submissions = files
-      .map((f) => {
-        const data = JSON.parse(fs.readFileSync(path.join(dir, f)));
-        return data;
-      })
-      .sort(
-        (a, b) =>
-          new Date(b.submittedAt).getTime() - new Date(a.submittedAt).getTime()
-      );
+  for (const id of ids) {
+    const sub = await kv.hgetall(id);
+    if (sub) submissions.push(sub);
   }
+
+  // Sort newest → oldest
+  submissions.sort(
+    (a, b) =>
+      new Date(b.submittedAt).getTime() - new Date(a.submittedAt).getTime()
+  );
 
   return { props: { submissions } };
 }
 
-// ----- Client Side -----
+// ---------- Client Side ----------
 export default function LogsPage({ submissions }) {
   const [authorized, setAuthorized] = useState(false);
   const [password, setPassword] = useState("");

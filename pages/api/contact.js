@@ -1,38 +1,27 @@
-import fs from "fs";
-import path from "path";
+// pages/api/contact.ts
+import kv from "../../lib/kv"; // relative path, no alias
 
 export default async function handler(req, res) {
   if (req.method !== "POST") {
     return res.status(405).json({ message: "Method not allowed" });
   }
 
-  const { name, email, phone, age, position, message } = req.body;
-  const dir = path.join(process.cwd(), "data", "submissions");
-
-  // Ensure folder exists
-  if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
-
-  // Create a timestamped filename
-  const timestamp = new Date().toISOString().replace(/[:.]/g, "-");
-  const filePath = path.join(dir, `submission-${timestamp}.json`);
-
-  const data = {
-    name,
-    email,
-    phone,
-    age,
-    position,
-    message,
+  const submission = {
+    ...req.body,
     submittedAt: new Date().toISOString(),
   };
 
   try {
-    fs.writeFileSync(filePath, JSON.stringify(data, null, 2));
-    console.log("✅ Submission saved:", filePath);
-    res.status(200).json({ message: "Submission saved locally" });
+    // Store the data in KV
+    const id = `sub_${Date.now()}`;
+    await kv.hset(id, submission);
+    await kv.lpush("gp31_submissions", id);
+
+    console.log("✅ Saved to KV:", id);
+    return res.status(200).json({ message: "Success" });
   } catch (err) {
     console.error("❌ Failed to save submission:", err);
-    res.status(500).json({ message: "Failed to save submission" });
+    return res.status(500).json({ message: "Failed to save submission" });
   }
 }
 

@@ -1,115 +1,13 @@
-﻿import Link from "next/link";
+﻿import dynamic from "next/dynamic";
 
-export default function TryoutFlyer() {
+const BallScene = dynamic(() => import("../components/BallScene"), {
+  ssr: false,
+});
+
+export default function Home() {
   return (
-    <main
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center",
-        minHeight: "100vh",
-        backgroundColor: "#0b0b0c",
-        padding: "20px",
-      }}
-    >
-      {/* Branded Header */}
-      <h1
-        style={{
-          color: "#FFD700",
-          textShadow: "0 0 15px rgba(255, 215, 0, 0.4)",
-          marginBottom: "25px",
-          textAlign: "center",
-          fontSize: "2.4rem",
-          fontWeight: "800",
-          letterSpacing: "1px",
-        }}
-      >
-        GP31 2026 Spring Baseball Tryouts
-      </h1>
-
-      {/* Centered Clickable Flyer */}
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          width: "100%",
-        }}
-      >
-        <Link href="/contact" passHref>
-          <img
-            src="/images/tryout-flyer.jpg"
-            alt="GP31 Tryout Flyer"
-            style={{
-              maxWidth: "90%",
-              height: "auto",
-              borderRadius: "14px",
-              boxShadow: "0 0 25px rgba(255, 215, 0, 0.25)",
-              cursor: "pointer",
-              transition: "transform 0.3s ease, box-shadow 0.3s ease",
-              display: "block",
-              margin: "0 auto",
-            }}
-            onMouseOver={(e) => {
-              e.currentTarget.style.transform = "scale(1.02)";
-              e.currentTarget.style.boxShadow =
-                "0 0 40px rgba(255, 215, 0, 0.45)";
-            }}
-            onMouseOut={(e) => {
-              e.currentTarget.style.transform = "scale(1)";
-              e.currentTarget.style.boxShadow =
-                "0 0 25px rgba(255, 215, 0, 0.25)";
-            }}
-          />
-        </Link>
-      </div>
-
-      {/* Centered CTA for 11U Page */}
-      <div
-        style={{
-          marginTop: "40px",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          width: "100%",
-        }}
-      >
-        <Link
-          href="/11u"
-          style={{
-            display: "inline-block",
-            padding: "14px 28px",
-            borderRadius: "8px",
-            background: "linear-gradient(90deg, #FFD700, #E6C200)",
-            color: "#0B0B0C",
-            fontWeight: "700",
-            fontSize: "1.1rem",
-            letterSpacing: "0.5px",
-            textDecoration: "none",
-            boxShadow: "0 0 15px rgba(255, 215, 0, 0.4)",
-            transition:
-              "transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease",
-            textAlign: "center",
-          }}
-          onMouseOver={(e) => {
-            e.currentTarget.style.transform = "scale(1.05)";
-            e.currentTarget.style.boxShadow =
-              "0 0 25px rgba(255, 215, 0, 0.6)";
-            e.currentTarget.style.background =
-              "linear-gradient(90deg, #FFF580, #FFD700)";
-          }}
-          onMouseOut={(e) => {
-            e.currentTarget.style.transform = "scale(1)";
-            e.currentTarget.style.boxShadow =
-              "0 0 15px rgba(255, 215, 0, 0.4)";
-            e.currentTarget.style.background =
-              "linear-gradient(90deg, #FFD700, #E6C200)";
-          }}
-        >
-          ⚾ Visit the 11U Team Page
-        </Link>
-      </div>
-    </main>
+    <div style={{ width: "100%", height: "100vh" }}>
+      <BallScene />
+    </div>
   );
 }

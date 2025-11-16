@@ -8,6 +8,8 @@
     "start": "next start"
   },
   "dependencies": {
+    "@react-three/drei": "^9.56.4",
+    "@react-three/fiber": "^8.9.1",
     "@tailwindcss/forms": "^0.5.7",
     "@vercel/kv": "^3.0.0",
     "autoprefixer": "^10.4.20",
@@ -21,6 +23,7 @@
     "react-dom": "18.3.1",
     "resend": "^6.4.1",
     "tailwindcss": "^3.4.3",
+    "three": "^0.148.0",
     "twilio": "^5.10.4",
     "yet-another-react-lightbox": "^3.25.0"
   },

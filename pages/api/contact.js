@@ -20,14 +20,17 @@ export default async function handler(req, res) {
 
     console.log("✅ Saved to KV:", id);
 
-    // 2️⃣ Send email notification
-    const transporter = nodemailer.createTransport({
-      service: "gmail",
-      auth: {
-        user: process.env.NOTIFY_EMAIL,
-        pass: process.env.NOTIFY_PASS,
-      },
-    });
+   // 2️⃣ Send email notification
+const transporter = nodemailer.createTransport({
+  host: "smtp.office365.com",
+  port: 587,
+  secure: false, // STARTTLS
+  auth: {
+    user: process.env.NOTIFY_EMAIL,
+    pass: process.env.NOTIFY_PASS,
+  },
+});
+
 
     const mailOptions = {
       from: `"GP31 Baseball Site" <${process.env.NOTIFY_EMAIL}>`,

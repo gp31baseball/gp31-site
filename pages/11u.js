@@ -165,35 +165,60 @@ export default function Home() {
         </p>
       </motion.header>
 
-      <motion.section
-        variants={fadeUp}
-        initial="hidden"
-        animate="show"
-        transition={{ delay: 0.2 }}
-        className="bg-white text-center py-12 px-4 md:px-12 w-full mb-10 rounded-none"
-      >
-        <div className="max-w-3xl mx-auto">
-          <h2 className="text-4xl font-bold text-[#D4AF37] glow-gold-text mb-4">
-            🏆 GP31 Baseball Official Site Launch
-          </h2>
-          <p className="text-lg text-blue-900 leading-relaxed mb-6">
-            Welcome to <strong>GP31Baseball.com</strong> — the home for{" "}
-            <strong>GP31 Baseball</strong>, a team built on faith, discipline,
-            and a drive to compete at the highest level.
-          </p>
-          <p className="text-lg text-blue-900 leading-relaxed mb-8">
-            Follow our journey as we grow the next generation of competitors
-            under the banner of Romans 8:31 — “If God is for us, who can be
-            against us.”
-          </p>
-          <a
-            href="/about"
-            className="inline-block bg-yellow-500 hover:bg-yellow-600 text-blue-900 font-semibold py-3 px-6 rounded-2xl shadow-md transition-transform transform hover:scale-105"
-          >
-            Learn More About GP31
-          </a>
-        </div>
-      </motion.section>
+      {/* === GP31 ANALYTICS LAUNCH BLOCK === */}
+<motion.section
+  variants={fadeUp}
+  initial="hidden"
+  animate="show"
+  transition={{ delay: 0.2 }}
+  className="bg-[#10224F] border-y-2 border-[#D4AF37] py-12 px-6 md:px-12 mb-12 shadow-[0_0_25px_rgba(255,215,0,0.15)]"
+>
+  <div className="max-w-3xl mx-auto text-center">
+
+    {/* ICON ROW */}
+    <div className="flex justify-center gap-6 mb-4 text-[#FFD700] drop-shadow-[0_0_8px_rgba(255,215,0,0.5)]">
+      {/* Bar chart */}
+      <svg xmlns="http://www.w3.org/2000/svg" className="w-10 h-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" d="M4 20v-6m6 6V4m6 16v-9m6 9V8" />
+      </svg>
+
+      {/* Crosshair / target */}
+      <svg xmlns="http://www.w3.org/2000/svg" className="w-10 h-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <circle cx="12" cy="12" r="3" strokeWidth="2"/>
+        <path strokeWidth="2" strokeLinecap="round" d="M12 2v3m0 14v3m10-10h-3M5 12H2" />
+      </svg>
+
+      {/* Baseball */}
+      <svg xmlns="http://www.w3.org/2000/svg" className="w-10 h-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <circle cx="12" cy="12" r="9" strokeWidth="2"/>
+        <path strokeWidth="2" strokeLinecap="round" d="M7 4.5c1.5 2 1.5 13 0 15m10-15c-1.5 2-1.5 13 0 15" />
+      </svg>
+    </div>
+
+    <h2 className="text-4xl font-bold text-[#FFD700] drop-shadow-[0_0_10px_rgba(255,215,0,0.5)] mb-4">
+      GP31 Advanced Stats & Analytics Hub
+    </h2>
+
+    <p className="text-gray-200 text-lg leading-relaxed mb-5">
+      Our <span className="font-bold text-[#FFD700]">full analytics platform</span> is live — tracking OBP, OPS, XBH, contact rate,
+      discipline index, radar profiles, leaderboards, and more.
+    </p>
+
+    <p className="text-gray-300 text-sm italic mb-8">
+      Powered by the GP31 Development Engine — built for growth, competition, and clarity.
+    </p>
+
+    <a
+      href="/stats"
+      className="inline-block bg-[#FFD700] text-[#0A1A3F] font-semibold py-3 px-7 rounded-xl 
+                 shadow-[0_0_20px_rgba(255,215,0,0.4)] hover:bg-amber-300 transition-all 
+                 hover:scale-105"
+    >
+      → View the GP31 Analytics Dashboard
+    </a>
+  </div>
+</motion.section>
+
 
       <motion.section
         variants={staggerContainer}

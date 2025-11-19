@@ -6,13 +6,13 @@ import { OrbitControls, useGLTF } from "@react-three/drei";
 import { useRef, useState, useEffect } from "react";
 
 /* ===========================================================
-   3D FLOATING BALL (NO ROTATION)
+   FLOATING BASEBALL MODEL
 =========================================================== */
 function BaseballModel() {
   const gltf = useGLTF("/models/baseball.glb");
 
-  const rootRef = useRef();   
-  const floatRef = useRef();  
+  const rootRef = useRef();
+  const floatRef = useRef();
 
   // responsive scale
   const [scale, setScale] = useState(1.2);
@@ -57,7 +57,7 @@ function BaseballModel() {
 }
 
 /* ===========================================================
-   MAIN PAGE
+   MAIN LANDING PAGE SCENE
 =========================================================== */
 export default function BallScene() {
   const teams = ["10u", "11u", "12u", "13u", "14u", "15u"];
@@ -70,11 +70,10 @@ export default function BallScene() {
         background: "radial-gradient(circle at center, #001136, #000000 85%)",
         overflow: "hidden",
         position: "relative",
-        pointerEvents: "none", // Canvas won't block clicks
+        pointerEvents: "none",
       }}
     >
-
-      {/* ====== STADIUM ATMOSPHERE ====== */}
+      {/* ====== STADIUM ATMOSPHERE OVERLAYS ====== */}
       <div
         style={{
           position: "absolute",
@@ -96,7 +95,7 @@ export default function BallScene() {
         }}
       />
 
-      {/* ====== GP31 TEXAS WATERMARK ====== */}
+      {/* ====== TEXAS WATERMARK ====== */}
       <img
         src="/images/gp31-texas-watermark.png"
         alt=""
@@ -115,7 +114,7 @@ export default function BallScene() {
       />
 
       {/* ===========================================================
-         HERO TEXT + SELECTOR (FULLY RESPONSIVE)
+         HERO BLOCK (TITLE + PILLS + SCOREBOARD BADGE)
       ============================================================ */}
       <div
         className="hero"
@@ -206,6 +205,7 @@ export default function BallScene() {
             flexWrap: "wrap",
             animation: "fadeIn 1.7s ease forwards",
             maxWidth: "95vw",
+            marginBottom: "1.4rem",
           }}
         >
           {teams.map((team) => (
@@ -228,7 +228,6 @@ export default function BallScene() {
                 boxShadow:
                   "0 0 18px rgba(212,160,24,0.45), inset 0 0 9px rgba(0,0,0,0.3)",
                 transition: "all 0.25s ease",
-                position: "relative",
               }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.transform = "translateY(-3px)";
@@ -245,13 +244,46 @@ export default function BallScene() {
             </div>
           ))}
         </div>
+
+        {/* ⭐ NEW 11U SCOREBOARD BADGE */}
+        <p
+          onClick={() => (window.location.href = "/scoreboard")}
+          style={{
+            display: "inline-block",
+            padding: "0.55rem 1.2rem",
+            background: "rgba(212,160,24,0.15)",
+            border: "1px solid rgba(212,160,24,0.45)",
+            borderRadius: "999px",
+            color: "#d4a018",
+            fontWeight: "700",
+            letterSpacing: "0.12em",
+            cursor: "pointer",
+            fontSize: "0.95rem",
+            textShadow: "0 0 12px rgba(212,160,24,0.45)",
+            boxShadow:
+              "0 0 14px rgba(212,160,24,0.3), inset 0 0 6px rgba(0,0,0,0.3)",
+            transition: "all 0.25s ease",
+            marginTop: "0.3rem",
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.transform = "translateY(-3px)";
+            e.currentTarget.style.boxShadow =
+              "0 0 22px rgba(212,160,24,0.75), inset 0 0 8px rgba(0,0,0,0.4)";
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.transform = "translateY(0)";
+            e.currentTarget.style.boxShadow =
+              "0 0 14px rgba(212,160,24,0.3), inset 0 0 6px rgba(0,0,0,0.3)";
+          }}
+        >
+          ⭐ NEW: 11U Scoreboard Live Now →
+        </p>
       </div>
 
       {/* =================== 3D CANVAS =================== */}
       <Canvas camera={{ position: [0, 0, 1], fov: 35 }}>
         <ambientLight intensity={0.25} />
 
-        {/* stadium rim lights */}
         <directionalLight
           position={[-5, 4, 6]}
           intensity={1.7}
@@ -263,7 +295,6 @@ export default function BallScene() {
           color={"#d4a018"}
         />
 
-        {/* spotlight under ball */}
         <spotLight
           position={[0, 2.5, 3]}
           angle={0.6}
@@ -272,7 +303,6 @@ export default function BallScene() {
           color={"#ffffff"}
         />
 
-        {/* shadow */}
         <mesh
           receiveShadow
           position={[0, -1.2, 0]}
@@ -295,90 +325,33 @@ export default function BallScene() {
       {/* =================== KEYFRAME ANIMATIONS =================== */}
       <style>
         {`
-          /* fade-in */
           @keyframes fadeIn {
             0% { opacity:0; }
             100% { opacity:1; }
           }
 
-          /* slide down */
           @keyframes slideDown {
             0% { opacity:0; transform:translateX(-50%) translateY(-20px); }
             100% { opacity:1; transform:translateX(-50%) translateY(0); }
           }
 
-          /* white sweep on underline */
           @keyframes underlineSweep {
             0% { transform:translateX(-120%); }
             40% { transform:translateX(120%); }
             100% { transform:translateX(120%); }
           }
 
-          /* watermark pulse */
           @keyframes watermarkPulse {
             0% { transform:translateX(-50%) scale(1); opacity:0.04; }
             50% { transform:translateX(-50%) scale(1.03); opacity:0.09; }
             100% { transform:translateX(-50%) scale(1); opacity:0.04; }
           }
 
-          /* pill shine sweep */
-          @keyframes pillShine {
-            0% { transform:translateX(-150%); }
-            50% { transform:translateX(140%); }
-            100% { transform:translateX(140%); }
-          }
-
-          /* =============================
-             RESPONSIVE FIXES
-          ============================= */
           @media (max-width: 768px) {
-
-            .hero { 
-              top: 12% !important; 
-            }
-
-            .hero-title {
-              font-size: 2.8rem !important;
-              letter-spacing: 0.14em !important;
-            }
-
-            .hero-sub {
-              font-size: 1rem !important;
-              letter-spacing: 0.25em !important;
-              margin-bottom: 1.2rem !important;
-            }
-
-            .team-pill {
-              padding: 0.5rem 1rem !important;
-              font-size: 0.95rem !important;
-            }
-
-            .ball-inner {
-              transform: translateX(0px) !important;
-            }
-
-            .ball-root {
-              position: relative !important;
-              top: -0.02 !important;
-            }
+            .hero { top: 12% !important; }
+            .hero-title { font-size: 2.8rem !important; }
+            .hero-sub { font-size: 1rem !important; }
           }
-
-          @media (max-width: 480px) {
-
-            .hero-title {
-              font-size: 2.3rem !important;
-            }
-
-            .ball-inner {
-              transform: translateX(0px) !important;
-            }
-
-            .team-pill {
-              padding: 0.4rem 0.8rem !important;
-              font-size:0.85rem !important;
-            }
-          }
-
         `}
       </style>
     </div>

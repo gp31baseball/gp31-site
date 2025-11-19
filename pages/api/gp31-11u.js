@@ -1,4 +1,4 @@
-import games from "../../data/gp31-11u.json";
+﻿import games from "../../data/gp31-11u.json";
 
 
 export default function handler(req, res) {
@@ -7,3 +7,4 @@ export default function handler(req, res) {
   );
   res.status(200).json({ games: sorted });
 }
+

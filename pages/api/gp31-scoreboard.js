@@ -1,4 +1,4 @@
-// pages/api/gp31-scoreboard.js
+﻿// pages/api/gp31-scoreboard.js
 
 import { scrapeTeamSchedule } from "../../lib/gcBrowserScraper";
 
@@ -37,7 +37,7 @@ const TEAM_CONFIG = [
 ];
 
 // ---------------------------------------------------------
-// NORMALIZER: Convert raw scrape data → scoreboard objects
+// NORMALIZER: Convert raw scrape data â†’ scoreboard objects
 // ---------------------------------------------------------
 function normalizeGame(raw, teamKey, teamName, idx) {
   // Skip empty GC rows
@@ -54,7 +54,7 @@ function normalizeGame(raw, teamKey, teamName, idx) {
   let result = null;
 
   if (raw.scoreRaw) {
-    const m = raw.scoreRaw.match(/([WLT])\s*(\d+)[–-](\d+)/);
+    const m = raw.scoreRaw.match(/([WLT])\s*(\d+)[â€“-](\d+)/);
     if (m) {
       result = m[1]; // W, L, or T
       gp31Runs = parseInt(m[2]);
@@ -123,4 +123,5 @@ export default async function handler(req, res) {
     });
   }
 }
+
 

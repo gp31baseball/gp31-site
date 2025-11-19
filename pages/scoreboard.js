@@ -37,6 +37,19 @@ export default function ScoreboardPage() {
   const recent = games.slice(1, 4);
   const archive = games.slice(4);
 
+  /* ============================================================
+      TEAM RECORD CALCULATIONS  (SAFE FOR COMBINED TEAMS)
+  ============================================================ */
+
+  // Total Record
+  const totalWins = games.filter((g) => g.result === "W").length;
+  const totalLosses = games.filter((g) => g.result === "L").length;
+
+  // Last 10
+  const last10 = games.slice(0, 10);
+  const last10Wins = last10.filter((g) => g.result === "W").length;
+  const last10Losses = last10.filter((g) => g.result === "L").length;
+
   return (
     <main className="min-h-screen bg-[#0B0B0C] text-gray-100 pb-16">
       <div className="mx-auto max-w-6xl px-4 pt-10">
@@ -63,6 +76,35 @@ export default function ScoreboardPage() {
         <section className="mt-10">
           <h2 className="text-2xl font-bold text-gold mb-4">Recent Games</h2>
 
+          {/* TEAM RECORD SUMMARY */}
+          <div
+            className="
+              inline-flex items-center gap-4 
+              bg-[#0F1117] 
+              border border-[#1A1D27] 
+              rounded-lg 
+              px-4 py-2 
+              mb-6 
+              text-gray-200 
+              shadow-md
+            "
+          >
+            <span className="font-semibold text-gold tracking-wide">
+              Record:
+            </span>
+            <span className="font-bold text-green-400 text-lg tracking-wider">
+              {totalWins}–{totalLosses}
+            </span>
+
+            <span className="font-semibold text-gold tracking-wide ml-4">
+              Last 10:
+            </span>
+            <span className="font-bold text-green-400 text-lg tracking-wider">
+              {last10Wins}–{last10Losses}
+            </span>
+          </div>
+
+          {/* RECENT GAME CARDS */}
           <div className="space-y-4">
             {recent.map((g, i) => (
               <div
@@ -77,10 +119,8 @@ export default function ScoreboardPage() {
               >
                 {/* Left Win/Loss color bar */}
                 <div
-                  className={`
-                    absolute left-0 top-0 h-full w-[6px]
-                    ${g.result === "W" ? "bg-green-500" : "bg-red-500"}
-                  `}
+                  className={`absolute left-0 top-0 h-full w-[6px]
+                    ${g.result === "W" ? "bg-green-500" : "bg-red-500"}`}
                 />
 
                 <div className="text-lg font-semibold text-gray-100">
@@ -107,64 +147,67 @@ export default function ScoreboardPage() {
           </div>
         </section>
 
-    {/* ARCHIVE (Collapsible) */}
-<section className="mt-16 pb-10">
-  <button
-  onClick={() => setShowArchive(!showArchive)}
-  className="
-    w-full flex items-center justify-between 
-    bg-[#0F1117]
-    px-4 py-3 
-    rounded-xl 
-    border border-[#1A1D27] 
-    shadow-[0_0_12px_rgba(0,0,0,0.25)]
-    text-xl font-bold text-gold 
-    hover:bg-[#12141B] 
-    transition
-  "
->
-  <span>Game Archive</span>
-  <span className="text-gold text-xl">
-    {showArchive ? "▲" : "▼"}
-  </span>
-</button>
+        {/* ARCHIVE (Collapsible) */}
+        <section className="mt-16 pb-10">
+          <button
+            onClick={() => setShowArchive(!showArchive)}
+            className="
+              w-full flex items-center justify-between 
+              bg-[#0F1117]
+              px-4 py-3 
+              rounded-xl 
+              border border-[#1A1D27] 
+              shadow-[0_0_12px_rgba(0,0,0,0.25)]
+              text-xl font-bold text-gold 
+              hover:bg-[#12141B] 
+              transition
+            "
+          >
+            <span>Game Archive</span>
+            <span className="text-gold text-xl">
+              {showArchive ? "▲" : "▼"}
+            </span>
+          </button>
 
+          {/* Smooth expand/collapse */}
+          <div
+            className={`transition-all duration-300 overflow-hidden ${
+              showArchive ? "max-h-[3000px] opacity-100" : "max-h-0 opacity-0"
+            }`}
+          >
+            <div className="space-y-3 mt-4">
+              {archive.map((g, i) => (
+                <div
+                  key={i}
+                  className="
+                    bg-[#0C0C10] p-3 rounded-lg 
+                    border border-[#1A1A25] shadow-sm
+                  "
+                >
+                  <div className="text-xs text-gray-400 mb-[2px]">
+                    {g.date}
+                  </div>
 
-  {/* Smooth expand/collapse */}
-  <div
-    className={`transition-all duration-300 overflow-hidden ${
-      showArchive ? "max-h-[3000px] opacity-100" : "max-h-0 opacity-0"
-    }`}
-  >
-    <div className="space-y-3 mt-4">
-      {archive.map((g, i) => (
-        <div
-          key={i}
-          className="
-            bg-[#0C0C10] p-3 rounded-lg 
-            border border-[#1A1A25] shadow-sm
-          "
-        >
-          <div className="text-xs text-gray-400 mb-[2px]">{g.date}</div>
+                  <div className="text-gray-200">
+                    <span
+                      className={
+                        g.result === "W" ? "text-green-400" : "text-red-400"
+                      }
+                    >
+                      {g.result}
+                    </span>{" "}
+                    {g.gp31Runs}-{g.oppRuns} — vs{" "}
+                    <span className="font-semibold">{g.opponent}</span>
+                  </div>
 
-          <div className="text-gray-200">
-            <span
-              className={
-                g.result === "W" ? "text-green-400" : "text-red-400"
-              }
-            >
-              {g.result}
-            </span>{" "}
-            {g.gp31Runs}-{g.oppRuns} — vs{" "}
-            <span className="font-semibold">{g.opponent}</span>
+                  <div className="text-[11px] text-gray-500">
+                    {g.location}
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
-
-          <div className="text-[11px] text-gray-500">{g.location}</div>
-        </div>
-      ))}
-    </div>
-  </div>
-</section>
+        </section>
 
       </div>
 
@@ -178,3 +221,4 @@ export default function ScoreboardPage() {
     </main>
   );
 }
+

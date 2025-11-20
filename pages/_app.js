@@ -5,7 +5,8 @@ import Navbar from "../components/Navbar";
 export default function App({ Component, pageProps }) {
   return (
     <>
-      <script src="http://localhost:3001/norad-tracker.js" defer />
+      <script src="/norad-tracker.js" defer />
+
       <Navbar />
       <Component {...pageProps} />
     </>

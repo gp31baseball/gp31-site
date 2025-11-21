@@ -1,5 +1,10 @@
 (function () {
-  const NORAD_ENDPOINT = "https://fortyonebuilt.com/api/norad/track";
+  
+  const NORAD_ENDPOINT = "https://www.fortyonebuilt.com/api/norad/track";
+
+
+
+
 
 
   function getDeviceId() {

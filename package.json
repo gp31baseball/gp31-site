@@ -30,6 +30,7 @@
     "resend": "^6.4.1",
     "tailwindcss": "^3.4.3",
     "three": "^0.148.0",
+    "ts-node": "^10.9.2",
     "twilio": "^5.10.4",
     "yet-another-react-lightbox": "^3.25.0"
   },

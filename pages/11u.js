@@ -103,13 +103,33 @@ export default function Home() {
   }, []);
 
   /* Coaches */
-  const coaches = [
-    { name: "Gregorio Petit", image: "/gallery/gregorio.jpg", bio: "Former MLB infielder..." },
-    { name: "Javier Betancourt", image: "/gallery/javier.jpg", bio: "Former Detroit Tigers infielder..." },
-    { name: "Andres Sthormes", image: "/gallery/andres.jpg", bio: "Former catcher..." },
-    { name: "Mario Fernandez", image: "/gallery/mario.jpg", bio: "Former pitcher..." },
-    { name: "Jose Carrillo", image: "/gallery/jose_carrillo.jpg", bio: "Former Astros org..." },
-  ];
+const coaches = [
+  { 
+    name: "Gregorio Petit", 
+    image: "/gallery/gregorio.jpg", 
+    bio: "Former MLB infielder (A’s, Astros, Yankees, Angels, Twins). Current manager of the Midland RockHounds. Brings big-league experience, elite infield instruction, and a championship-level leadership mindset."
+  },
+  { 
+    name: "Javier Betancourt", 
+    image: "/gallery/javier.jpg", 
+    bio: "Venezuelan former Detroit Tigers minor-league infielder. Highly respected for his advanced infield IQ, competitive edge, and ability to develop young players with pro-level detail."
+  },
+  { 
+    name: "Andres Sthormes", 
+    image: "/gallery/andres.jpg", 
+    bio: "Former catcher (Detroit Tigers, Miami Marlins) and GP31’s catching coach. Expert at developing hitters, managing pitchers, and refining defensive fundamentals behind the plate."
+  },
+  { 
+    name: "Jose Carrillo", 
+    image: "/gallery/jose_carrillo.jpg", 
+    bio: "Venezuelan-born former professional player in the Houston Astros organization (Tri-City ValleyCats / GCL Astros). Serves as GP31’s all-purpose coach, bringing versatile experience and strong leadership across all areas of player development."
+  },
+  { 
+    name: "Mario Fernandez", 
+    image: "/gallery/mario.jpg", 
+    bio: "Former pitcher (Tampa Bay Rays). Specializes in developing young arms, teaching mound presence, and controlling tempo under pressure."
+  }
+];
 
   const fadeUp = {
     hidden: { opacity: 0, y: 30 },
